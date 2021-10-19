@@ -1,0 +1,15 @@
+{
+  "name": "amora",
+  "private": true,
+  "workspaces": {
+    "packages": [
+      "packages/*"
+    ]
+  },
+  "version": "1.0.0",
+  "description": "Amora Monorepo",
+  "main": "index.js",
+  "repository": "https://github.com/akinncar/amora",
+  "author": "Akinn Rosa <akinncar@hotmail.com>",
+  "license": "MIT"
+}
