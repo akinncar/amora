@@ -1,0 +1,12 @@
+{
+  "name": "@amora/website",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "deploy": "gh-pages -d ./"
+  },
+  "dependencies": {
+    "gh-pages": "^3.2.3"
+  }
+}
