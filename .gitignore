@@ -1,1 +1,10 @@
 node_modules/
+
+# Monorepo
+apps/*/credentials.json
+packages/*/build
+
+# Expo
+.expo
+__generated__
+web-build
