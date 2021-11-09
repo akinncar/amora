@@ -1,8 +1,8 @@
-node_modules/
-
 # Monorepo
+node_modules/
 apps/*/credentials.json
 packages/*/build
+yarn-error.log
 
 # Expo
 .expo
