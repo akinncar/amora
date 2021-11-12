@@ -2,7 +2,7 @@ import dotenv from "dotenv";
 import { createServer } from "http";
 // import log4js from "./shared/logger";
 
-import app from "./server/app";
+import app from "./app";
 import initDB from "./database/database";
 import { environment, serverConf } from "./shared/index";
 

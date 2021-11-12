@@ -12,11 +12,17 @@
     "build": "esbuild ./src/index.ts --bundle --platform=node --outdir=lib"
   },
   "dependencies": {
+    "@entria/graphql-mongo-helpers": "^1.0.1",
+    "@entria/graphql-mongoose-loader": "^4.3.2",
     "@koa/cors": "^3.1.0",
+    "bcrypt": "^5.0.1",
+    "dataloader": "^2.0.0",
     "dotenv": "^10.0.0",
     "dotenv-safe": "^8.2.0",
     "esbuild": "^0.13.12",
     "esbuild-register": "^3.1.0",
+    "graphql-playground-middleware-koa": "^1.6.22",
+    "graphql-relay": "^0.9.0",
     "koa": "^2.13.4",
     "koa-bodyparser": "^4.3.0",
     "koa-graphql": "^0.9.0",

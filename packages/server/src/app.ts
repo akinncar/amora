@@ -1,9 +1,10 @@
-import { getDataloaders } from "../graphql/loaderRegister";
+import { getDataloaders } from "./graphql/loaderRegister";
 
 require("dotenv").config();
 import Koa from "koa";
 import GraphQLHTTP from "koa-graphql";
 import Router from "koa-router";
+import koaPlayground from 'graphql-playground-middleware-koa';
 import cors from "@koa/cors";
 import bodyParser from "koa-bodyparser";
 
@@ -47,7 +48,14 @@ const graphqlSettingsPerReq = async (req, ctx, koaContext) => {
 const graphqlServer = GraphQLHTTP(graphqlSettingsPerReq);
 
 router.all("/graphql", graphqlServer);
-
+router.all(
+  '/graphiql',
+  koaPlayground({
+    endpoint: '/graphql',
+    subscriptionEndpoint: '/subscriptions',
+    // subscriptionsEndpoint: `ws://localhost:${port}/subscriptions`
+  }),
+);
 app.use(bodyParser());
 app.use(cors());
 app.use(router.routes()).use(router.allowedMethods());
