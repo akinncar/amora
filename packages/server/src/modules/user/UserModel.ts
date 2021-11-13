@@ -36,8 +36,6 @@ export interface IUser extends Document {
   name: string;
   email: string;
   password: string;
-  // @todo relate with ITeam interface
-  kind: string[];
   authenticate: (plainTextPassword: string) => boolean;
   encryptPassword: (password: string | undefined) => string;
   createdAt: Date;

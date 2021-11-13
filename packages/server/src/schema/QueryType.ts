@@ -4,7 +4,7 @@ import UserType, { UserConnection } from "../modules/user/UserType";
 import * as UserLoader from "../modules/user/UserLoader";
 // import * as TeamLoader from "../modules/team/TeamLoader";
 import { nodeField, nodesField } from "../modules/node/typeRegister";
-import { connectionArgs } from "../../graphql/connectionDefinitions";
+import { connectionArgs } from "../graphql/connectionDefinitions";
 // import { TeamConnection } from "../modules/team/TeamType";
 
 // import { version } from "../../../package.json";

@@ -9,7 +9,7 @@ import cors from "@koa/cors";
 import bodyParser from "koa-bodyparser";
 
 // import { getUser } from "./getUser";
-import { schema } from "./schema";
+import { schema } from "./schema/schema";
 
 // import { auth } from "./auth";
 
