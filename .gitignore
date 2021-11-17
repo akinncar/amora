@@ -3,6 +3,7 @@ node_modules/
 apps/*/credentials.json
 packages/*/build
 yarn-error.log
+.DS_Store
 
 # Expo
 .expo
