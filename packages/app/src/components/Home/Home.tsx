@@ -26,14 +26,12 @@ export function Home() {
     {fetchPolicy: 'store-or-network'},
   );
 
-  console.log(data)
-
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignContent: 'center' }}>
       <FlatList 
         data={data?.stores.edges}
         renderItem={({ item: { node } }) => <Store store={node} />}
-        keyExtractor={({ item }) => item?.node.id.toString()}
+        keyExtractor={({ node }) => node.id.toString()}
         ItemSeparatorComponent={() => <View style={{ height: 16 }} />}
         ListHeaderComponent={() => <View style={{ height: 16 }} />}
         ListFooterComponent={() => <View style={{ height: 16 }} />}
