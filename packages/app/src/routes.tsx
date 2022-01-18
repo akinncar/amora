@@ -4,7 +4,9 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
-import { Home } from './components/Home/Home'
+import { Feather } from "@expo/vector-icons";
+
+import { Home } from './components/home/Home'
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -12,8 +14,26 @@ const Tab = createBottomTabNavigator();
 function BottomTab() {
   return (
     <Tab.Navigator>
-      <Tab.Screen name="Home" component={Home} />
-      <Tab.Screen name="Settings" component={Home} />
+      <Tab.Screen 
+        name="Estabelecimentos" 
+        component={Home} 
+        options={{
+          tabBarLabel:() => { return null },
+          tabBarIcon: ({ color }) => (
+            <Feather name="home" color={color} size={26} />
+          ),
+        }}
+      />
+      <Tab.Screen 
+        name="Settings" 
+        component={Home}
+        options={{
+          tabBarLabel:() => { return null },
+          tabBarIcon: ({ color }) => (
+            <Feather name="settings" color={color} size={26} />
+          ),
+        }}
+      />
     </Tab.Navigator>
   );
 }
