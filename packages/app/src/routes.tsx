@@ -7,6 +7,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Feather } from "@expo/vector-icons";
 
 import { Home } from './components/home/Home'
+import { Settings } from './components/settings/Settings'
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -25,8 +26,8 @@ function BottomTab() {
         }}
       />
       <Tab.Screen 
-        name="Settings" 
-        component={Home}
+        name="Configurações" 
+        component={Settings}
         options={{
           tabBarLabel:() => { return null },
           tabBarIcon: ({ color }) => (
