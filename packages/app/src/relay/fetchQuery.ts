@@ -5,6 +5,8 @@ import {
   Store,
 } from 'relay-runtime';
 
+import { API_URL } from '@env'
+
 // Define a function that fetches the results of an operation (query/mutation/etc)
 // and returns its results as a Promise:
 export function fetchQuery(
@@ -13,7 +15,7 @@ export function fetchQuery(
   cacheConfig: any,
   uploadables: any,
 ) {
-  return fetch('http://localhost:9001/graphql', {
+  return fetch(`${API_URL}/graphql`, {
     method: 'POST',
     headers: {
       // Add authentication and other headers here
