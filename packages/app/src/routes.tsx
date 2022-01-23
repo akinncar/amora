@@ -6,8 +6,9 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 import { Feather } from "@expo/vector-icons";
 
-import { Home } from './components/home/Home'
-import { Settings } from './components/settings/Settings'
+import { Home } from "./components/home/Home";
+import { Settings } from "./components/settings/Settings";
+import { StoreDetails } from "./components/storeDetails/StoreDetails";
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -15,21 +16,25 @@ const Tab = createBottomTabNavigator();
 function BottomTab() {
   return (
     <Tab.Navigator>
-      <Tab.Screen 
-        name="Estabelecimentos" 
-        component={Home} 
+      <Tab.Screen
+        name="Estabelecimentos"
+        component={Home}
         options={{
-          tabBarLabel:() => { return null },
+          tabBarLabel: () => {
+            return null;
+          },
           tabBarIcon: ({ color }) => (
             <Feather name="home" color={color} size={26} />
           ),
         }}
       />
-      <Tab.Screen 
-        name="Configurações" 
+      <Tab.Screen
+        name="Configurações"
         component={Settings}
         options={{
-          tabBarLabel:() => { return null },
+          tabBarLabel: () => {
+            return null;
+          },
           tabBarIcon: ({ color }) => (
             <Feather name="settings" color={color} size={26} />
           ),
@@ -50,7 +55,8 @@ export function Routes() {
             headerShown: false,
           }}
         />
+        <Stack.Screen name="StoreDetails" component={StoreDetails} />
       </Stack.Navigator>
     </NavigationContainer>
-  )
+  );
 }

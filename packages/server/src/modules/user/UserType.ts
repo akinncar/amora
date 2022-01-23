@@ -1,5 +1,6 @@
 import { GraphQLObjectType, GraphQLString, GraphQLList } from "graphql";
 import { globalIdField } from "graphql-relay";
+import { objectIdResolver } from "@entria/graphql-mongo-helpers";
 
 // import TeamType from "../team/TeamType";
 // import Team from "../team/TeamModel";
@@ -13,6 +14,7 @@ const UserType = new GraphQLObjectType({
   description: "User data",
   fields: () => ({
     id: globalIdField("User"),
+    ...objectIdResolver,
     name: {
       type: GraphQLString,
       resolve: (user) => user.name,

@@ -1,5 +1,6 @@
 import { GraphQLObjectType, GraphQLString, GraphQLList } from "graphql";
 import { globalIdField } from "graphql-relay";
+import { objectIdResolver } from "@entria/graphql-mongo-helpers";
 
 // import TeamType from "../team/TeamType";
 // import Team from "../team/TeamModel";
@@ -13,6 +14,7 @@ const StoreType = new GraphQLObjectType({
   description: "Store data",
   fields: () => ({
     id: globalIdField("Store"),
+    ...objectIdResolver,
     name: {
       type: GraphQLString,
       resolve: (store) => store.name,

@@ -3,7 +3,7 @@ import { GraphQLObjectType, GraphQLNonNull, GraphQLString } from "graphql";
 import UserType, { UserConnection } from "../modules/user/UserType";
 import * as UserLoader from "../modules/user/UserLoader";
 
-import { StoreConnection } from "../modules/store/StoreType";
+import StoreType, { StoreConnection } from "../modules/store/StoreType";
 import * as StoreLoader from "../modules/store/StoreLoader";
 
 import { nodeField, nodesField } from "../modules/node/typeRegister";
@@ -41,6 +41,16 @@ export default new GraphQLObjectType({
       },
       resolve: async (_, args, context) =>
         await StoreLoader.loadAll(context, args),
+    },
+    storeByStoreId: {
+      type: StoreType,
+      args: {
+        id: {
+          type: new GraphQLNonNull(GraphQLString)
+        }
+      },
+      resolve: async (_, args, context) =>
+        StoreLoader.load(context, args.id),
     },
   }),
 });

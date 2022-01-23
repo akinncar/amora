@@ -1,10 +1,10 @@
 import React, { Suspense } from "react";
-import { View, Text } from 'react-native'
+import { View, Text } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 
-import { useLazyLoadQuery, graphql } from 'react-relay'
+import { useLazyLoadQuery, graphql } from "react-relay";
 
-import { Store } from '../home/Store'
+import { Store } from "../home/Store";
 
 export function Home() {
   const data = useLazyLoadQuery(
@@ -13,7 +13,7 @@ export function Home() {
         stores {
           edges {
             node {
-              id
+              _id
               name
               description
               pictureUrl
@@ -23,19 +23,19 @@ export function Home() {
       }
     `,
     {},
-    {fetchPolicy: 'store-or-network'},
+    { fetchPolicy: "store-or-network" }
   );
 
   return (
-    <View style={{ flex: 1, justifyContent: 'center', alignContent: 'center' }}>
-      <FlatList 
+    <View style={{ flex: 1, justifyContent: "center", alignContent: "center" }}>
+      <FlatList
         data={data?.stores.edges}
         renderItem={({ item: { node } }) => <Store store={node} />}
-        keyExtractor={({ node }) => node.id.toString()}
+        keyExtractor={({ node }) => node._id.toString()}
         ItemSeparatorComponent={() => <View style={{ height: 16 }} />}
         ListHeaderComponent={() => <View style={{ height: 16 }} />}
         ListFooterComponent={() => <View style={{ height: 16 }} />}
-      />  
+      />
     </View>
-  )
+  );
 }

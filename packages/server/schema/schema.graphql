@@ -15,6 +15,7 @@ type Query {
   me: User
   users(after: String, first: Int, before: String, last: Int): UserConnection!
   stores(after: String, first: Int, before: String, last: Int): StoreConnection!
+  storeByStoreId(id: String!): Store
 }
 
 """An object with an ID"""
@@ -27,6 +28,9 @@ interface Node {
 type User implements Node {
   """The ID of an object"""
   id: ID!
+
+  """mongoose _id"""
+  _id: String!
   name: String
   username: String
   email: String
@@ -121,6 +125,9 @@ type StoreEdge {
 type Store implements Node {
   """The ID of an object"""
   id: ID!
+
+  """mongoose _id"""
+  _id: String!
   name: String
   description: String
   pictureUrl: String

@@ -6,6 +6,12 @@
       "packages/*"
     ]
   },
+
+  "scripts": {
+    "server": "yarn workspace @amora/server start",
+    "app:ios": "yarn workspace @amora/app ios",
+    "app:android": "yarn workspace @amora/app android"
+  },
   "version": "1.0.0",
   "description": "Amora Monorepo",
   "main": "index.js",
