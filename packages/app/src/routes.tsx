@@ -10,6 +10,7 @@ import { AntDesign, Feather } from '@expo/vector-icons';
 import { Home } from './components/home/Home';
 import { Settings } from './components/settings/Settings';
 import { SignUp } from './components/signUp/SignUp';
+import { SignIn } from './components/signIn/SignIn';
 import { StoreDetails } from './components/storeDetails/StoreDetails';
 import { QrCode } from './components/qrCode/QrCode';
 
@@ -78,14 +79,43 @@ export function Routes() {
             headerShown: false,
           }}
         />
-        <Stack.Screen
-          name="SignUp"
-          component={SignUp}
-          options={{
-            headerTitle: 'Criar sua conta',
-            headerBackTitleVisible: false,
-          }}
-        />
+        <Stack.Group screenOptions={{ presentation: 'modal' }}>
+          <Stack.Screen
+            name="SignUp"
+            component={SignUp}
+            options={({ navigation }) => ({
+              headerTitle: 'Criar sua conta',
+              // headerBackTitleVisible: false,
+              headerLeft: () => null,
+
+              headerRight: () => (
+                <TouchableOpacity
+                  onPress={() => navigation.goBack()}
+                  style={{ padding: 8, marginRight: 8 }}
+                >
+                  <Feather name="x" size={24} />
+                </TouchableOpacity>
+              ),
+            })}
+          />
+          <Stack.Screen
+            name="SignIn"
+            component={SignIn}
+            options={({ navigation }) => ({
+              headerTitle: 'Faça o login',
+              // headerBackTitleVisible: false,
+              headerLeft: () => null,
+              headerRight: () => (
+                <TouchableOpacity
+                  onPress={() => navigation.goBack()}
+                  style={{ padding: 8, marginRight: 8 }}
+                >
+                  <Feather name="x" size={24} />
+                </TouchableOpacity>
+              ),
+            })}
+          />
+        </Stack.Group>
         <Stack.Group screenOptions={{ presentation: 'modal' }}>
           <Stack.Screen
             name="QrCode"

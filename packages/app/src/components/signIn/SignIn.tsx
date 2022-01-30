@@ -3,6 +3,7 @@ import { Text, TouchableOpacity, View } from 'react-native';
 
 import { useNavigation } from '@react-navigation/native';
 
+import { TextInput } from '../ui/TextInput';
 import { Button } from '../ui/Button';
 
 export function SignIn() {
@@ -13,10 +14,22 @@ export function SignIn() {
       style={{
         flex: 1,
         justifyContent: 'center',
-        alignItems: 'center',
       }}
     >
-      <Text style={{ textAlign: 'center', fontWeight: 'bold' }}>SignIn</Text>
+      <TextInput
+        label="E-mail"
+        style={{ marginHorizontal: 16, marginBottom: 16 }}
+      />
+      <TextInput
+        label="Senha"
+        style={{ marginHorizontal: 16, marginBottom: 16 }}
+        secureTextEntry={true}
+      />
+      <Button
+        onPress={() => {}}
+        title="Entrar"
+        style={{ margin: 16, padding: 8 }}
+      />
     </View>
   );
 }

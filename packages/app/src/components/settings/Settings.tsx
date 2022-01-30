@@ -21,7 +21,7 @@ export function Settings() {
         style={{ marginHorizontal: 16, padding: 8 }}
       />
       <Text style={{ paddingVertical: 12, textAlign: 'center' }}>ou</Text>
-      <TouchableOpacity>
+      <TouchableOpacity onPress={() => navigate('SignIn')}>
         <Text style={{ textAlign: 'center', fontWeight: 'bold' }}>
           Faça login com uma conta já existente
         </Text>
