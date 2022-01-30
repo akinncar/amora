@@ -25,7 +25,7 @@ export function Store({ store }) {
       <View style={{ flex: 1, flexDirection: 'row' }}>
         <Image
           source={{ uri: pictureUrl }}
-          style={{ width: 40, height: 40, marginRight: 16 }}
+          style={{ width: 40, height: 40, marginRight: 16, borderRadius: 6 }}
         />
         <View style={{ justifyContent: 'center' }}>
           <Text style={{ fontWeight: 'bold' }}>{name}</Text>

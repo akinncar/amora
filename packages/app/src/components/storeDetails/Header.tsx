@@ -12,7 +12,8 @@ export function Header({ store }) {
         justifyContent: 'flex-start',
         alignContent: 'center',
         backgroundColor: '#FFF',
-        padding: 16,
+        paddingHorizontal: 16,
+        paddingVertical: 32,
         flexDirection: 'row',
         borderRadius: 8,
       }}
@@ -20,7 +21,7 @@ export function Header({ store }) {
       <View style={{ flex: 1, flexDirection: 'row' }}>
         <Image
           source={{ uri: store.pictureUrl }}
-          style={{ width: 40, height: 40, marginRight: 16 }}
+          style={{ width: 64, height: 64, marginRight: 16, borderRadius: 6 }}
         />
         <View style={{ justifyContent: 'center' }}>
           <Text style={{ fontWeight: 'bold' }}>{store.name}</Text>
