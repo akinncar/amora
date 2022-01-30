@@ -16,7 +16,6 @@ export function Product({ product }) {
         justifyContent: 'flex-start',
         alignContent: 'center',
         backgroundColor: '#FFF',
-        marginHorizontal: 16,
         padding: 16,
         flexDirection: 'row',
         borderRadius: 8,
@@ -29,7 +28,7 @@ export function Product({ product }) {
         />
         <View style={{ justifyContent: 'center' }}>
           <Text style={{ fontWeight: 'bold' }}>{name}</Text>
-          <Text>{description}</Text>
+          <Text>{points} pontos</Text>
         </View>
       </View>
       <Button onPress={() => navigate('QrCode')} title="Resgatar" />

@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { TouchableOpacity } from 'react-native';
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -80,10 +81,19 @@ export function Routes() {
           <Stack.Screen
             name="QrCode"
             component={QrCode}
-            options={{
+            options={({ navigation }) => ({
               headerTitle: 'Seu QRCode',
               headerBackTitleVisible: false,
-            }}
+              headerLeft: () => null,
+              headerRight: () => (
+                <TouchableOpacity
+                  onPress={() => navigation.goBack()}
+                  style={{ padding: 8, marginRight: 8 }}
+                >
+                  <Feather name="x" size={24} />
+                </TouchableOpacity>
+              ),
+            })}
           />
         </Stack.Group>
         <Stack.Screen
