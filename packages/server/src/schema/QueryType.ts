@@ -51,7 +51,7 @@ export default new GraphQLObjectType({
       type: StoreType,
       args: {
         id: {
-          type: new GraphQLNonNull(GraphQLString)
+          type: new GraphQLNonNull(GraphQLID)
         }
       },
       resolve: async (_, args, context) =>
