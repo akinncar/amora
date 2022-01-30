@@ -1,14 +1,14 @@
-import * as React from "react";
+import * as React from 'react';
 
-import { NavigationContainer } from "@react-navigation/native";
-import { createStackNavigator } from "@react-navigation/stack";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-import { Feather } from "@expo/vector-icons";
+import { Feather } from '@expo/vector-icons';
 
-import { Home } from "./components/home/Home";
-import { Settings } from "./components/settings/Settings";
-import { StoreDetails } from "./components/storeDetails/StoreDetails";
+import { Home } from './components/home/Home';
+import { Settings } from './components/settings/Settings';
+import { StoreDetails } from './components/storeDetails/StoreDetails';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -47,7 +47,7 @@ function BottomTab() {
 export function Routes() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName={"Menu"}>
+      <Stack.Navigator initialRouteName={'Menu'}>
         <Stack.Screen
           name="Menu"
           component={BottomTab}
@@ -55,7 +55,11 @@ export function Routes() {
             headerShown: false,
           }}
         />
-        <Stack.Screen name="StoreDetails" component={StoreDetails} />
+        <Stack.Screen
+          name="StoreDetails"
+          component={StoreDetails}
+          options={({ route }) => ({ title: route.params.title })}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );

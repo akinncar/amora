@@ -9,9 +9,9 @@ export const withConnectionCursor =
   <Context extends object>(
     model: Model<any>,
     loader: LoaderFn<Context>,
-    condFn: (...p: any[]) => { conditions?: object; sort?: object },
+    condFn: (...p: readonly any[]) => { readonly conditions?: object; readonly sort?: object },
   ) =>
-  (...params: any[]) => {
+  (...params: readonly any[]) => {
     const { conditions = {}, sort = {} } = condFn(...params);
 
     const [context, args] = params;

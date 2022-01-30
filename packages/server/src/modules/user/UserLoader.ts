@@ -1,6 +1,6 @@
-import { createLoader } from "../../graphql/createLoader";
+import { createLoader } from '../../graphql/createLoader';
 
-import { registerLoader } from "../../graphql/loaderRegister";
+import { registerLoader } from '../../graphql/loaderRegister';
 
 import UserModel from './UserModel';
 

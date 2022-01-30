@@ -1,6 +1,6 @@
-import { GraphQLObjectType } from "graphql";
+import { GraphQLObjectType } from 'graphql';
 
-import { fromGlobalId, nodeDefinitions } from "graphql-relay";
+import { fromGlobalId, nodeDefinitions } from 'graphql-relay';
 
 // import { GraphQLContext } from '../../graphql/types';
 
@@ -8,9 +8,9 @@ type GraphQLContext = {};
 
 type Load = (context: GraphQLContext, id: string) => any;
 type TypeLoaders = {
-  [key: string]: {
-    type: GraphQLObjectType;
-    load: Load;
+  readonly [key: string]: {
+    readonly type: GraphQLObjectType;
+    readonly load: Load;
   };
 };
 

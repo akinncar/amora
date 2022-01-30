@@ -1,19 +1,19 @@
-import { GraphQLObjectType, GraphQLString, GraphQLList } from "graphql";
-import { globalIdField } from "graphql-relay";
-import { objectIdResolver } from "@entria/graphql-mongo-helpers";
+import { GraphQLList, GraphQLObjectType, GraphQLString } from 'graphql';
+import { globalIdField } from 'graphql-relay';
+import { objectIdResolver } from '@entria/graphql-mongo-helpers';
 
 // import TeamType from "../team/TeamType";
 // import Team from "../team/TeamModel";
-import { registerTypeLoader, nodeInterface } from "../node/typeRegister";
+import { nodeInterface, registerTypeLoader } from '../node/typeRegister';
 
-import { load } from "./StoreLoader";
-import { connectionDefinitions } from "../../graphql/connectionDefinitions";
+import { load } from './StoreLoader';
+import { connectionDefinitions } from '../../graphql/connectionDefinitions';
 
 const StoreType = new GraphQLObjectType({
-  name: "Store",
-  description: "Store data",
+  name: 'Store',
+  description: 'Store data',
   fields: () => ({
-    id: globalIdField("Store"),
+    id: globalIdField('Store'),
     ...objectIdResolver,
     name: {
       type: GraphQLString,
@@ -36,6 +36,6 @@ registerTypeLoader(StoreType, load);
 export default StoreType;
 
 export const StoreConnection = connectionDefinitions({
-  name: "Store",
+  name: 'Store',
   nodeType: StoreType,
 });

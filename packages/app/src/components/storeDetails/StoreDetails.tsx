@@ -1,8 +1,10 @@
-import React from "react";
-import { View, Text } from "react-native";
-import { useNavigation, useRoute } from "@react-navigation/native";
+import React from 'react';
+import { Text, View, Image } from 'react-native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 
-import { useLazyLoadQuery, graphql } from "react-relay";
+import { graphql, useLazyLoadQuery } from 'react-relay';
+
+import { Header } from './Header';
 
 export function StoreDetails() {
   const { params } = useRoute();
@@ -20,12 +22,12 @@ export function StoreDetails() {
       }
     `,
     { id: storeId },
-    { fetchPolicy: "store-or-network" }
+    { fetchPolicy: 'store-or-network' }
   );
 
   return (
-    <View>
-      <Text>{data?.store.name}</Text>
+    <View style={{ flex: 1, backgroundColor: '#FFF' }}>
+      <Header store={data?.store} />
     </View>
   );
 }

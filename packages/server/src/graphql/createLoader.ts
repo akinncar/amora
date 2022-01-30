@@ -1,16 +1,16 @@
 // eslint-disable-next-line
 import { mongooseLoader } from "@entria/graphql-mongoose-loader";
-import DataLoader from "dataloader";
-import { ConnectionArguments } from "graphql-relay";
-import { Model, Types, Document } from "mongoose";
+import DataLoader from 'dataloader';
+import { ConnectionArguments } from 'graphql-relay';
+import { Document, Model, Types } from 'mongoose';
 
 import {
   buildMongoConditionsFromFilters,
   GraphQLFilter,
-} from "@entria/graphql-mongo-helpers";
+} from '@entria/graphql-mongo-helpers';
 
 // import { validateContextUser } from './validateContextUser';
-import { withConnectionCursor } from "./withConnectionCursor";
+import { withConnectionCursor } from './withConnectionCursor';
 
 const defaultViewerCanSee = <Value extends Document>(
   context: BaseContext<string, Value>,
@@ -23,7 +23,7 @@ export interface BaseContext<
   LoaderName extends string,
   Value extends Document
 > {
-  dataloaders: Record<LoaderName, DataLoader<string, Value>>;
+  readonly dataloaders: Record<LoaderName, DataLoader<string, Value>>;
 }
 
 export type CreateLoaderArgs<
@@ -31,14 +31,14 @@ export type CreateLoaderArgs<
   LoaderName extends string,
   Value extends Document
 > = {
-  model: Model<Value>;
-  viewerCanSee?: (context: Context, data: Value) => Value | Promise<Value>;
-  loaderName: LoaderName;
-  filterMapping?: object;
+  readonly model: Model<Value>;
+  readonly viewerCanSee?: (context: Context, data: Value) => Value | Promise<Value>;
+  readonly loaderName: LoaderName;
+  readonly filterMapping?: object;
 };
 
 export interface FilteredConnectionArguments extends ConnectionArguments {
-  filters: GraphQLFilter | null;
+  readonly filters: GraphQLFilter | null;
 }
 
 export const createLoader = <
@@ -52,7 +52,7 @@ export const createLoader = <
   filterMapping = {},
 }: CreateLoaderArgs<Context, LoaderName, Value>) => {
   class Loader {
-    [key: string]: any;
+    readonly [key: string]: any;
     constructor(data: Value) {
       // TODO - improve this - get only model paths
       // eslint-disable-next-line
@@ -87,7 +87,7 @@ export const createLoader = <
 
       return filteredData ? (new Wrapper(filteredData) as Value) : null;
     } catch (err) {
-      console.log("err", err);
+      console.log('err', err);
       return null;
     }
   };

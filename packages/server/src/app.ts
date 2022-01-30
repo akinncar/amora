@@ -1,15 +1,15 @@
-import { getDataloaders } from "./graphql/loaderRegister";
+import { getDataloaders } from './graphql/loaderRegister';
 
-require("dotenv").config();
-import Koa from "koa";
-import GraphQLHTTP from "koa-graphql";
-import Router from "koa-router";
+require('dotenv').config();
+import Koa from 'koa';
+import GraphQLHTTP from 'koa-graphql';
+import Router from 'koa-router';
 import koaPlayground from 'graphql-playground-middleware-koa';
-import cors from "@koa/cors";
-import bodyParser from "koa-bodyparser";
+import cors from '@koa/cors';
+import bodyParser from 'koa-bodyparser';
 
 // import { getUser } from "./getUser";
-import { schema } from "./schema/schema";
+import { schema } from './schema/schema';
 
 // import { auth } from "./auth";
 
@@ -23,7 +23,7 @@ const graphqlSettingsPerReq = async (req, ctx, koaContext) => {
   const dataloaders = getDataloaders();
 
   return {
-    graphiql: process.env.NODE_ENV !== "production",
+    graphiql: process.env.NODE_ENV !== 'production',
     schema,
     context: {
       user,
@@ -47,7 +47,7 @@ const graphqlSettingsPerReq = async (req, ctx, koaContext) => {
 
 const graphqlServer = GraphQLHTTP(graphqlSettingsPerReq);
 
-router.all("/graphql", graphqlServer);
+router.all('/graphql', graphqlServer);
 router.all(
   '/graphiql',
   koaPlayground({

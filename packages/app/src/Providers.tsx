@@ -4,8 +4,8 @@ import { RelayEnvironmentProvider } from 'react-relay';
 import Environment from './relay/Environment';
 
 type Props = {
-  children: React.ReactNode;
-  environment: typeof Environment;
+  readonly children: React.ReactNode;
+  readonly environment: typeof Environment;
 };
 const Providers = ({ children, environment = Environment }: Props) => {
   return (

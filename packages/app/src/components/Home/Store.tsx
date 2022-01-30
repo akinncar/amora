@@ -1,8 +1,8 @@
-import React from "react";
-import { View, Text, Image } from "react-native";
-import { useNavigation } from "@react-navigation/native";
+import React from 'react';
+import { Image, Text, View } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
-import { Button } from "../ui/Button";
+import { Button } from '../ui/Button';
 
 export function Store({ store }) {
   const { _id, pictureUrl, name, description } = store;
@@ -13,27 +13,27 @@ export function Store({ store }) {
     <View
       style={{
         flex: 1,
-        justifyContent: "flex-start",
-        alignContent: "center",
-        backgroundColor: "#FFF",
+        justifyContent: 'flex-start',
+        alignContent: 'center',
+        backgroundColor: '#FFF',
         marginHorizontal: 16,
         padding: 16,
-        flexDirection: "row",
+        flexDirection: 'row',
         borderRadius: 8,
       }}
     >
-      <View style={{ flex: 1, flexDirection: "row" }}>
+      <View style={{ flex: 1, flexDirection: 'row' }}>
         <Image
           source={{ uri: pictureUrl }}
           style={{ width: 40, height: 40, marginRight: 16 }}
         />
-        <View style={{ justifyContent: "center" }}>
-          <Text style={{ fontWeight: "bold" }}>{name}</Text>
+        <View style={{ justifyContent: 'center' }}>
+          <Text style={{ fontWeight: 'bold' }}>{name}</Text>
           <Text>{description}</Text>
         </View>
       </View>
       <Button
-        onPress={() => navigate("StoreDetails", { storeId: _id })}
+        onPress={() => navigate('StoreDetails', { storeId: _id, title: name })}
         title="Detalhes"
       />
     </View>

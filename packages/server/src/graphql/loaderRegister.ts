@@ -7,7 +7,7 @@ export interface DataLoaders {
     // >;
   }
   
-  const loaders: {
+  const loaders: { readonly
     [Name in keyof DataLoaders]: () => DataLoaders[Name];
   } = {} as any;
   
@@ -19,7 +19,7 @@ export interface DataLoaders {
   };
   
   const getDataloaders = (): DataLoaders =>
-    (Object.keys(loaders) as (keyof DataLoaders)[]).reduce(
+    (Object.keys(loaders) as readonly (keyof DataLoaders)[]).reduce(
       (prev, loaderKey) => ({
         ...prev,
         [loaderKey]: loaders[loaderKey](),

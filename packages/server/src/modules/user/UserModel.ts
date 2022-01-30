@@ -1,5 +1,5 @@
-import mongoose, { Document, Model, Types } from "mongoose";
-import bcrypt from "bcrypt";
+import mongoose, { Document, Model, Types } from 'mongoose';
+import bcrypt from 'bcrypt';
 
 const { ObjectId } = mongoose.Schema.Types;
 const Schema = mongoose.Schema;
@@ -8,7 +8,7 @@ const UserSchema = new Schema(
   {
     name: {
       type: String,
-      required: "name is required",
+      required: 'name is required',
     },
     username: {
       type: String,
@@ -16,30 +16,30 @@ const UserSchema = new Schema(
     },
     email: {
       type: String,
-      required: "email is required",
+      required: 'email is required',
     },
     password: {
       type: String,
-      required: "password is required",
+      required: 'password is required',
     },
   },
   {
-    collection: "User",
+    collection: 'User',
     timestamps: {
-      createdAt: "createdAt",
-      updatedAt: "updatedAt",
+      createdAt: 'createdAt',
+      updatedAt: 'updatedAt',
     },
   }
 );
 
 export interface IUser extends Document {
-  name: string;
-  email: string;
-  password: string;
-  authenticate: (plainTextPassword: string) => boolean;
-  encryptPassword: (password: string | undefined) => string;
-  createdAt: Date;
-  updatedAt: Date;
+  readonly name: string;
+  readonly email: string;
+  readonly password: string;
+  readonly authenticate: (plainTextPassword: string) => boolean;
+  readonly encryptPassword: (password: string | undefined) => string;
+  readonly createdAt: Date;
+  readonly updatedAt: Date;
 }
 
 UserSchema.methods = {
@@ -51,6 +51,6 @@ UserSchema.methods = {
   },
 };
 
-const UserModel: Model<IUser> = mongoose.model("User", UserSchema);
+const UserModel: Model<IUser> = mongoose.model('User', UserSchema);
 
 export default UserModel;

@@ -1,10 +1,10 @@
-import React, { Suspense } from "react";
-import { View, Text } from "react-native";
-import { FlatList } from "react-native-gesture-handler";
+import React, { Suspense } from 'react';
+import { Text, View } from 'react-native';
+import { FlatList } from 'react-native-gesture-handler';
 
-import { useLazyLoadQuery, graphql } from "react-relay";
+import { graphql, useLazyLoadQuery } from 'react-relay';
 
-import { Store } from "../home/Store";
+import { Store } from '../home/Store';
 
 export function Home() {
   const data = useLazyLoadQuery(
@@ -23,11 +23,11 @@ export function Home() {
       }
     `,
     {},
-    { fetchPolicy: "store-or-network" }
+    { fetchPolicy: 'store-or-network' }
   );
 
   return (
-    <View style={{ flex: 1, justifyContent: "center", alignContent: "center" }}>
+    <View style={{ flex: 1, justifyContent: 'center', alignContent: 'center' }}>
       <FlatList
         data={data?.stores.edges}
         renderItem={({ item: { node } }) => <Store store={node} />}

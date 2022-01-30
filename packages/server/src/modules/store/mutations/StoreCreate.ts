@@ -1,15 +1,15 @@
-import { GraphQLString, GraphQLNonNull } from "graphql";
-import { mutationWithClientMutationId } from "graphql-relay";
-import bcrypt from "bcrypt";
+import { GraphQLNonNull, GraphQLString } from 'graphql';
+import { mutationWithClientMutationId } from 'graphql-relay';
+import bcrypt from 'bcrypt';
 
 import { errorField, successField } from '../../../graphql';
 
 import * as StoreLoader from '../StoreLoader';
-import Store from "../StoreModel";
-import StoreType from "../StoreType";
+import Store from '../StoreModel';
+import StoreType from '../StoreType';
 
 export default mutationWithClientMutationId({
-  name: "StoreCreate",
+  name: 'StoreCreate',
   inputFields: {
     name: {
       type: new GraphQLNonNull(GraphQLString),

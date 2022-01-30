@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 
 // import { config } from "../config";
 
@@ -9,11 +9,11 @@ const initDB = () => {
   });
 
   mongoose.connection
-    .on("error", (error) => console.log(error))
-    .once("open", () => {
+    .on('error', (error) => console.log(error))
+    .once('open', () => {
       // const info = mongoose.connections[0];
       // console.log(`Connected to  ${info.host}:${info.port}/${info.name}`)
-      console.log("Connected to Database");
+      console.log('Connected to Database');
     });
 };
 

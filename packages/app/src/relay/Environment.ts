@@ -1,4 +1,4 @@
-import { Environment, Network, RecordSource, Store, QueryResponseCache } from 'relay-runtime';
+import { Environment, Network, QueryResponseCache, RecordSource, Store } from 'relay-runtime';
 
 import { fetchQuery } from './fetchQuery'
 

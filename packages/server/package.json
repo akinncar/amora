@@ -9,7 +9,7 @@
   "license": "MIT",
   "scripts": {
     "es": "node -r esbuild-register",
-    "start": "yarn es ./src/index.ts",
+    "start": "yarn es ./src/index.ts -w",
     "build": "esbuild ./src/index.ts --bundle --platform=node --outdir=lib",
     "update-schema": "yarn es ./scripts/updateSchema.ts --extensions \".es6,.js,.es,.jsx,.mjs,.ts\""
   },

@@ -1,10 +1,10 @@
 import SERVER_ENV from './server.config';
 import LOG_ENV from './logger.config.js';
 
-var environment = process.env.NODE_ENV || 'development';
+const environment = process.env.NODE_ENV || 'development';
 
-var serverConf = SERVER_ENV[environment];
-var logConf = LOG_ENV[environment];
+const serverConf = SERVER_ENV[environment];
+const logConf = LOG_ENV[environment];
 
 export {
     environment,

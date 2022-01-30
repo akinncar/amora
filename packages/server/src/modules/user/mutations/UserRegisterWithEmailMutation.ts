@@ -1,17 +1,17 @@
-import { GraphQLString, GraphQLNonNull } from "graphql";
-import { mutationWithClientMutationId } from "graphql-relay";
-import bcrypt from "bcrypt";
+import { GraphQLNonNull, GraphQLString } from 'graphql';
+import { mutationWithClientMutationId } from 'graphql-relay';
+import bcrypt from 'bcrypt';
 
 import { errorField, successField } from '../../../graphql';
 
 import * as UserLoader from '../UserLoader';
-import User from "../UserModel";
-import UserType from "../UserType";
+import User from '../UserModel';
+import UserType from '../UserType';
 
-import { generateToken } from "../../../auth";
+import { generateToken } from '../../../auth';
 
 export default mutationWithClientMutationId({
-  name: "UserRegisterWithEmail",
+  name: 'UserRegisterWithEmail',
   inputFields: {
     name: {
       type: new GraphQLNonNull(GraphQLString),
@@ -24,14 +24,14 @@ export default mutationWithClientMutationId({
     },
   },
   mutateAndGetPayload: async ({ name, email, password }) => {
-    let hasUser = await User.findOne({
+    const hasUser = await User.findOne({
       email: email.trim().toLowerCase(),
     });
 
     if (hasUser) {
       return {
         token: null,
-        error: "User already exists",
+        error: 'User already exists',
       };
     }
 

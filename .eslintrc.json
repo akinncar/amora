@@ -1,0 +1,78 @@
+{
+  "root": true,
+  "parser": "@typescript-eslint/parser",
+  "env": {
+    "es6": true
+  },
+  "ignorePatterns": [
+    "node_modules",
+    "build",
+    "coverage",
+    "babel.config.js",
+    "metro.config.js",
+    "hardhat.config.js",
+    "__tests__/contracts"
+  ],
+  "plugins": [
+    "import",
+    "eslint-comments",
+    "functional",
+    "react",
+    "react-native"
+  ],
+  "extends": [
+    "eslint:recommended",
+    "plugin:eslint-comments/recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:import/typescript",
+    "plugin:functional/lite",
+    "prettier"
+  ],
+  "globals": {
+    "console": true,
+    "__DEV__": true
+  },
+  "rules": {
+    "@typescript-eslint/explicit-module-boundary-types": "off",
+    "eslint-comments/disable-enable-pair": [
+      "error",
+      {
+        "allowWholeFile": true
+      }
+    ],
+    "eslint-comments/no-unused-disable": "error",
+    // "import/order": [
+    //   "error",
+    //   {
+    //     "newlines-between": "always",
+    //     "alphabetize": {
+    //       "order": "asc"
+    //     }
+    //   }
+    // ],
+    "sort-imports": [
+      "error",
+      {
+        "ignoreDeclarationSort": true,
+        "ignoreCase": true
+      }
+    ],
+    "quotes": [
+      "error",
+      "single"
+    ],
+    "functional/no-let": "off",
+    "functional/immutable-data": "off",
+    "functional/prefer-type-literal": "off",
+    "react-native/no-unused-styles": 2,
+    "react-native/split-platform-components": 2,
+    "react-native/no-color-literals": "off",
+    "react-native/no-raw-text": 2,
+    "react-native/no-single-element-style-arrays": 2
+  },
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  }
+}

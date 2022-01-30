@@ -1,19 +1,19 @@
-import { GraphQLObjectType, GraphQLString, GraphQLList } from "graphql";
-import { globalIdField } from "graphql-relay";
-import { objectIdResolver } from "@entria/graphql-mongo-helpers";
+import { GraphQLList, GraphQLObjectType, GraphQLString } from 'graphql';
+import { globalIdField } from 'graphql-relay';
+import { objectIdResolver } from '@entria/graphql-mongo-helpers';
 
 // import TeamType from "../team/TeamType";
 // import Team from "../team/TeamModel";
-import { registerTypeLoader, nodeInterface } from "../node/typeRegister";
+import { nodeInterface, registerTypeLoader } from '../node/typeRegister';
 
-import { load } from "./UserLoader";
-import { connectionDefinitions } from "../../graphql/connectionDefinitions";
+import { load } from './UserLoader';
+import { connectionDefinitions } from '../../graphql/connectionDefinitions';
 
 const UserType = new GraphQLObjectType({
-  name: "User",
-  description: "User data",
+  name: 'User',
+  description: 'User data',
   fields: () => ({
-    id: globalIdField("User"),
+    id: globalIdField('User'),
     ...objectIdResolver,
     name: {
       type: GraphQLString,
@@ -49,6 +49,6 @@ registerTypeLoader(UserType, load);
 export default UserType;
 
 export const UserConnection = connectionDefinitions({
-  name: "User",
+  name: 'User',
   nodeType: UserType,
 });
