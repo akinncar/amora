@@ -22,6 +22,10 @@ const UserSchema = new Schema(
       type: String,
       required: 'password is required',
     },
+    type: {
+      type: String,
+      required: 'type is required, can be provider or customer',
+    }
   },
   {
     collection: 'User',
@@ -36,6 +40,7 @@ export interface IUser extends Document {
   readonly name: string;
   readonly email: string;
   readonly password: string;
+  readonly type: string; // provider or customer
   readonly authenticate: (plainTextPassword: string) => boolean;
   readonly encryptPassword: (password: string | undefined) => string;
   readonly createdAt: Date;

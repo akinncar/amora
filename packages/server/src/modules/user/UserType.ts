@@ -27,6 +27,10 @@ const UserType = new GraphQLObjectType({
       type: GraphQLString,
       resolve: (user) => user.email,
     },
+    type: {
+      type: GraphQLString, // provider or customer
+      resolve: (user) => user.type,
+    },
     // team: {
     //   type: TeamType,
     //   resolve: async (user) => {

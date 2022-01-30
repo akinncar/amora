@@ -22,8 +22,11 @@ export default mutationWithClientMutationId({
     password: {
       type: new GraphQLNonNull(GraphQLString),
     },
+    type: {
+      type: new GraphQLNonNull(GraphQLString),
+    },
   },
-  mutateAndGetPayload: async ({ name, email, password }) => {
+  mutateAndGetPayload: async ({ name, email, password, type }) => {
     const hasUser = await User.findOne({
       email: email.trim().toLowerCase(),
     });
@@ -39,6 +42,7 @@ export default mutationWithClientMutationId({
       name,
       email,
       password: bcrypt.hashSync(password, 8),
+      type
     }).save();
 
     return {
