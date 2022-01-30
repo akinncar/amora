@@ -7,6 +7,8 @@ import { Button } from '../ui/Button';
 export function Product({ product }) {
   const { _id, pictureUrl, name, description, points } = product;
 
+  const { navigate } = useNavigation();
+
   return (
     <View
       style={{
@@ -30,7 +32,7 @@ export function Product({ product }) {
           <Text>{description}</Text>
         </View>
       </View>
-      <Button onPress={() => {}} title="Resgatar" />
+      <Button onPress={() => navigate('QrCode')} title="Resgatar" />
     </View>
   );
 }

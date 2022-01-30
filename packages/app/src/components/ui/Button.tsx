@@ -4,22 +4,24 @@ import { GestureResponderEvent, Text, TouchableOpacity } from 'react-native';
 type ButtonProps = {
   readonly title: string;
   readonly onPress?: (event: GestureResponderEvent) => void;
+  readonly style?: StyleProp<ViewStyle>;
 };
 
-export function Button({ title, onPress }: ButtonProps) {
+export function Button({ title, onPress, style }: ButtonProps) {
   return (
     <TouchableOpacity
-      style={{
-        paddingVertical: 6,
-        paddingHorizontal: 8,
-        backgroundColor: '#000',
-        borderRadius: 4,
-        justifyContent: 'center',
-        alignItems: 'center',
-      }}
+      style={[
+        {
+          backgroundColor: '#000',
+          borderRadius: 4,
+          justifyContent: 'center',
+          alignItems: 'center',
+        },
+        style,
+      ]}
       onPress={onPress}
     >
-      <Text style={{ color: '#FFF' }}>{title}</Text>
+      <Text style={{ color: '#FFF', padding: 8 }}>{title}</Text>
     </TouchableOpacity>
   );
 }

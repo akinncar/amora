@@ -1,13 +1,15 @@
 import React from 'react';
-import { Text, View, FlatList } from 'react-native';
+import { FlatList, SafeAreaView, View } from 'react-native';
 import { useNavigation, useRoute } from '@react-navigation/native';
 
 import { graphql, useLazyLoadQuery } from 'react-relay';
 
 import { Header } from './Header';
 import { Product } from './Product';
+import { Button } from '../ui/Button';
 
 export function StoreDetails() {
+  const { navigate } = useNavigation();
   const { params } = useRoute();
   const { storeId } = params;
 
@@ -39,13 +41,18 @@ export function StoreDetails() {
   );
 
   return (
-    <View style={{ flex: 1, backgroundColor: '#FFF' }}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: '#FFF' }}>
       <FlatList
         data={data?.products.edges}
         renderItem={({ item: { node } }) => <Product product={node} />}
         keyExtractor={({ node }) => node._id.toString()}
         ListHeaderComponent={() => <Header store={data?.store} />}
       />
-    </View>
+      <Button
+        onPress={() => navigate('QrCode')}
+        title="Exibir seu QRCode"
+        style={{ margin: 16, padding: 8 }}
+      />
+    </SafeAreaView>
   );
 }
