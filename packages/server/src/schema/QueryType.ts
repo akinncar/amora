@@ -1,10 +1,15 @@
-import { GraphQLNonNull, GraphQLObjectType, GraphQLString } from 'graphql';
+import { GraphQLNonNull, GraphQLObjectType, GraphQLString, GraphQLID } from 'graphql';
+
+import { withFilter } from '../graphql/withFilter'
 
 import UserType, { UserConnection } from '../modules/user/UserType';
 import * as UserLoader from '../modules/user/UserLoader';
 
 import StoreType, { StoreConnection } from '../modules/store/StoreType';
 import * as StoreLoader from '../modules/store/StoreLoader';
+
+import ProductType, { ProductConnection } from '../modules/product/ProductType';
+import * as ProductLoader from '../modules/product/ProductLoader';
 
 import { nodeField, nodesField } from '../modules/node/typeRegister';
 import { connectionArgs } from '../graphql/connectionDefinitions';
@@ -51,6 +56,16 @@ export default new GraphQLObjectType({
       },
       resolve: async (_, args, context) =>
         StoreLoader.load(context, args.id),
+    },
+    productsByStoreId: {
+      type: GraphQLNonNull(ProductConnection.connectionType),
+      args: {
+        storeId: {
+          type: new GraphQLNonNull(GraphQLID)
+        }
+      },
+      resolve: async (_, args, context) =>
+        ProductLoader.loadAll(context, withFilter(args, { storeId: args.storeId })),
     },
   }),
 });
