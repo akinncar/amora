@@ -9,6 +9,7 @@ import { AntDesign, Feather } from '@expo/vector-icons';
 
 import { Home } from './components/home/Home';
 import { Settings } from './components/settings/Settings';
+import { SignUp } from './components/signUp/SignUp';
 import { StoreDetails } from './components/storeDetails/StoreDetails';
 import { QrCode } from './components/qrCode/QrCode';
 
@@ -77,13 +78,20 @@ export function Routes() {
             headerShown: false,
           }}
         />
+        <Stack.Screen
+          name="SignUp"
+          component={SignUp}
+          options={{
+            headerTitle: 'Criar sua conta',
+            headerBackTitleVisible: false,
+          }}
+        />
         <Stack.Group screenOptions={{ presentation: 'modal' }}>
           <Stack.Screen
             name="QrCode"
             component={QrCode}
             options={({ navigation }) => ({
               headerTitle: 'Seu QRCode',
-              headerBackTitleVisible: false,
               headerLeft: () => null,
               headerRight: () => (
                 <TouchableOpacity
