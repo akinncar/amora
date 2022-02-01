@@ -35,6 +35,7 @@ type User implements Node {
   name: String
   username: String
   email: String
+  type: String
 }
 
 """A connection to a list of items."""
@@ -217,6 +218,7 @@ input UserRegisterWithEmailInput {
   name: String!
   email: String!
   password: String!
+  type: String!
   clientMutationId: String
 }
 

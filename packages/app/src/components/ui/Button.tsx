@@ -1,5 +1,6 @@
 import React from 'react';
 import {
+  ActivityIndicator,
   GestureResponderEvent,
   StyleProp,
   Text,
@@ -11,9 +12,15 @@ type ButtonProps = {
   readonly title: string;
   readonly onPress?: (event: GestureResponderEvent) => void;
   readonly style?: StyleProp<ViewStyle>;
+  readonly isLoading?: boolean;
 };
 
-export function Button({ title, onPress, style }: ButtonProps) {
+export function Button({
+  title,
+  onPress,
+  style,
+  isLoading = false,
+}: ButtonProps) {
   return (
     <TouchableOpacity
       style={[
@@ -27,7 +34,11 @@ export function Button({ title, onPress, style }: ButtonProps) {
       ]}
       onPress={onPress}
     >
-      <Text style={{ color: '#FFF', padding: 8 }}>{title}</Text>
+      {isLoading ? (
+        <ActivityIndicator color="#FFF" size={16} style={{ padding: 8 }} />
+      ) : (
+        <Text style={{ color: '#FFF', padding: 8 }}>{title}</Text>
+      )}
     </TouchableOpacity>
   );
 }
