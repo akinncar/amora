@@ -7,9 +7,11 @@ import { graphql, useLazyLoadQuery } from 'react-relay';
 import { Header } from './Header';
 import { Product } from './Product';
 import { Button } from '../ui/Button';
+import { useAuth } from '../../core/auth/useAuth';
 
 export function StoreDetails() {
   const { navigate } = useNavigation();
+  const { token } = useAuth();
   const { params } = useRoute();
   const { storeId } = params;
 
@@ -48,11 +50,13 @@ export function StoreDetails() {
         keyExtractor={({ node }) => node._id.toString()}
         ListHeaderComponent={() => <Header store={data?.store} />}
       />
-      <Button
-        onPress={() => navigate('QrCode')}
-        title="Exibir seu QRCode"
-        style={{ margin: 16, padding: 8 }}
-      />
+      {token && (
+        <Button
+          onPress={() => navigate('QrCode')}
+          title="Exibir seu QRCode"
+          style={{ margin: 16, padding: 8 }}
+        />
+      )}
     </SafeAreaView>
   );
 }

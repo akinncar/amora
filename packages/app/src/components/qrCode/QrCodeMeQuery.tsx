@@ -1,7 +1,7 @@
 import { graphql } from 'react-relay';
 
-export const SettingsMeQuery = graphql`
-  query SettingsMeQuery {
+export const QrCodeMeQuery = graphql`
+  query QrCodeMeQuery {
     me {
       _id
     }

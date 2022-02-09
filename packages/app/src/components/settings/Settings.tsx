@@ -2,7 +2,7 @@ import React, { useCallback, useState } from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 
 import { useNavigation } from '@react-navigation/native';
-import { graphql, useLazyLoadQuery, useQueryLoader } from 'react-relay';
+import { useLazyLoadQuery, useQueryLoader } from 'react-relay';
 
 import { SettingsMeQuery } from './SettingsMeQuery';
 import { Button } from '../ui/Button';
@@ -19,11 +19,7 @@ export function Settings() {
     []
   );
 
-  const data = useLazyLoadQuery(
-    SettingsMeQuery,
-    {},
-    { fetchPolicy: 'store-or-network' }
-  );
+  const data = useLazyLoadQuery(SettingsMeQuery, {}, undefined);
 
   return (
     <View

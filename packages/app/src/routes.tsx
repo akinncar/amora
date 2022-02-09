@@ -13,11 +13,14 @@ import { SignUp } from './components/auth/SignUp';
 import { SignIn } from './components/auth/SignIn';
 import { StoreDetails } from './components/storeDetails/StoreDetails';
 import { QrCode } from './components/qrCode/QrCode';
+import { useAuth } from './core/auth/useAuth';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
 function BottomTab() {
+  const { token } = useAuth();
+
   return (
     <Tab.Navigator>
       <Tab.Screen
@@ -33,24 +36,27 @@ function BottomTab() {
           ),
         }}
       />
-      <Tab.Screen
-        name="MenuQrCode"
-        component={QrCode}
-        options={{
-          tabBarLabel: () => {
-            return null;
-          },
-          tabBarIcon: ({ color }) => (
-            <AntDesign name="qrcode" color={color} size={26} />
-          ),
-        }}
-        listeners={({ navigation }) => ({
-          tabPress: e => {
-            e.preventDefault();
-            return navigation.navigate('QrCode');
-          },
-        })}
-      />
+      {token && (
+        <Tab.Screen
+          name="MenuQrCode"
+          component={QrCode}
+          options={{
+            tabBarLabel: () => {
+              return null;
+            },
+            tabBarIcon: ({ color }) => (
+              <AntDesign name="qrcode" color={color} size={26} />
+            ),
+          }}
+          listeners={({ navigation }) => ({
+            tabPress: e => {
+              e.preventDefault();
+              return navigation.navigate('QrCode');
+            },
+          })}
+        />
+      )}
+
       <Tab.Screen
         name="Settings"
         component={Settings}
