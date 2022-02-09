@@ -8,6 +8,7 @@ import { Header } from './Header';
 import { Product } from './Product';
 import { Button } from '../ui/Button';
 import { useAuth } from '../../core/auth/useAuth';
+import { StoreDetailsQuery } from './StoreDetailsQuery';
 
 export function StoreDetails() {
   const { navigate } = useNavigation();
@@ -16,39 +17,25 @@ export function StoreDetails() {
   const { storeId } = params;
 
   const data = useLazyLoadQuery(
-    graphql`
-      query StoreDetailsQuery($id: ID!) {
-        store: storeByStoreId(id: $id) {
-          _id
-          name
-          description
-          pictureUrl
-        }
-        products: productsByStoreId(storeId: $id) {
-          edges {
-            node {
-              _id
-              name
-              description
-              pictureUrl
-              points
-              storeId
-            }
-          }
-        }
-      }
-    `,
-    { id: storeId },
-    { fetchPolicy: 'store-or-network' }
+    StoreDetailsQuery,
+    { storeId },
+    { fetchPolicy: 'store-and-network', fetchKey: new Date().toString() }
   );
+
+  const userPoints =
+    data?.userPoints?.edges.length > 0 ? data?.userPoints?.edges[0].node : {};
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: '#FFF' }}>
       <FlatList
-        data={data?.products.edges}
-        renderItem={({ item: { node } }) => <Product product={node} />}
+        data={data?.products?.edges}
+        renderItem={({ item: { node } }) => (
+          <Product product={node} userPoints={userPoints} />
+        )}
         keyExtractor={({ node }) => node._id.toString()}
-        ListHeaderComponent={() => <Header store={data?.store} />}
+        ListHeaderComponent={() => (
+          <Header store={data?.store} userPoints={userPoints} />
+        )}
       />
       {token && (
         <Button

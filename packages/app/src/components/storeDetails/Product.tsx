@@ -5,7 +5,7 @@ import { useNavigation } from '@react-navigation/native';
 import { Button } from '../ui/Button';
 import { useAuth } from '../../core/auth/useAuth';
 
-export function Product({ product }) {
+export function Product({ product, userPoints }) {
   const { _id, pictureUrl, name, description, points } = product;
   const { token } = useAuth();
 
@@ -33,7 +33,13 @@ export function Product({ product }) {
           <Text>{points} pontos</Text>
         </View>
       </View>
-      {token && <Button onPress={() => navigate('QrCode')} title="Resgatar" />}
+      {token && (
+        <Button
+          onPress={() => navigate('QrCode')}
+          title="Resgatar"
+          disabled={userPoints.points < points}
+        />
+      )}
     </View>
   );
 }

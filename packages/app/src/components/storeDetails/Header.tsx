@@ -1,10 +1,10 @@
 import React from 'react';
-import { Text, View, Image } from 'react-native';
+import { Image, Text, View } from 'react-native';
 import { useNavigation, useRoute } from '@react-navigation/native';
 
 import { graphql, useLazyLoadQuery } from 'react-relay';
 
-export function Header({ store }) {
+export function Header({ store, userPoints }) {
   return (
     <View
       style={{
@@ -20,15 +20,22 @@ export function Header({ store }) {
     >
       <View style={{ flex: 1, flexDirection: 'row' }}>
         <Image
-          source={{ uri: store.pictureUrl }}
+          source={{ uri: store?.pictureUrl }}
           style={{ width: 64, height: 64, marginRight: 16, borderRadius: 6 }}
         />
         <View style={{ justifyContent: 'center' }}>
-          <Text style={{ fontWeight: 'bold' }}>{store.name}</Text>
-          <Text>{store.description}</Text>
+          <Text style={{ fontWeight: 'bold' }}>{store?.name}</Text>
+          <Text>{store?.description}</Text>
         </View>
       </View>
-      <Text style={{ alignSelf: 'center' }}>8 pontos</Text>
+      {userPoints?.points && (
+        <View style={{ justifyContent: 'center' }}>
+          <Text style={{ fontWeight: 'bold' }}>Você tem</Text>
+          <Text style={{ alignSelf: 'center' }}>
+            {userPoints.points} pontos
+          </Text>
+        </View>
+      )}
     </View>
   );
 }

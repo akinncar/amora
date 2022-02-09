@@ -13,6 +13,7 @@ type ButtonProps = {
   readonly onPress?: (event: GestureResponderEvent) => void;
   readonly style?: StyleProp<ViewStyle>;
   readonly isLoading?: boolean;
+  readonly disabled?: boolean;
 };
 
 export function Button({
@@ -20,12 +21,14 @@ export function Button({
   onPress,
   style,
   isLoading = false,
+  disabled = false,
 }: ButtonProps) {
   return (
     <TouchableOpacity
+      disabled={disabled}
       style={[
         {
-          backgroundColor: '#000',
+          backgroundColor: disabled ? '#bfbfbf' : '#000',
           borderRadius: 4,
           justifyContent: 'center',
           alignItems: 'center',
