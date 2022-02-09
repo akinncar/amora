@@ -1,34 +1,23 @@
 import React, { useState } from 'react';
-import { ActivityIndicator, Alert, ScrollView, Text, View } from 'react-native';
-import { graphql, useMutation } from 'react-relay';
+import { ActivityIndicator, Alert, ScrollView, View } from 'react-native';
+import { useMutation } from 'react-relay';
 
 import { useNavigation } from '@react-navigation/native';
 
 import { TextInput } from '../ui/TextInput';
 import { RadioButton } from '../ui/RadioButton';
 import { Button } from '../ui/Button';
+import { SignUpUserRegisterWithEmailMutation } from './SignUpUserRegisterWithEmailMutation';
+
+import { SignUpUserRegisterWithEmailMutation as SignUpUserRegisterWithEmailMutationType } from './__generated__/SignUpUserRegisterWithEmailMutation.graphql';
 
 export function SignUp() {
   const { navigate } = useNavigation();
 
-  const [createUser, isLoading] = useMutation(graphql`
-    mutation SignUpUserRegisterWithEmailMutation(
-      $input: UserRegisterWithEmailInput!
-    ) {
-      UserRegisterWithEmail(input: $input) {
-        token
-        error
-        success
-        me {
-          id
-          name
-          username
-          email
-          type
-        }
-      }
-    }
-  `);
+  const [createUser, isLoading] =
+    useMutation<SignUpUserRegisterWithEmailMutationType>(
+      SignUpUserRegisterWithEmailMutation
+    );
 
   const [type, setType] = useState('customer'); // customer or provider
   const [name, setName] = useState('Akinn Teste');

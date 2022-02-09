@@ -5,23 +5,13 @@ import { FlatList } from 'react-native-gesture-handler';
 import { graphql, useLazyLoadQuery } from 'react-relay';
 
 import { Store } from '../home/Store';
+import { HomeStoreListQuery } from './HomeStoreListQuery';
+
+import type { HomeStoreListQuery as HomeStoreListQueryType } from './__generated__/HomeStoreListQuery.graphql';
 
 export function Home() {
-  const data = useLazyLoadQuery(
-    graphql`
-      query HomeStoreListQuery {
-        stores {
-          edges {
-            node {
-              _id
-              name
-              description
-              pictureUrl
-            }
-          }
-        }
-      }
-    `,
+  const data = useLazyLoadQuery<HomeStoreListQueryType>(
+    HomeStoreListQuery,
     {},
     { fetchPolicy: 'store-or-network' }
   );

@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from 'react';
-import { Alert, Text, TouchableOpacity, View } from 'react-native';
-import { graphql, useMutation, useQueryLoader } from 'react-relay';
+import { Alert, View } from 'react-native';
+import { useMutation, useQueryLoader } from 'react-relay';
 
 import { useNavigation } from '@react-navigation/native';
 
@@ -8,6 +8,9 @@ import { TextInput } from '../ui/TextInput';
 import { Button } from '../ui/Button';
 import { useAuth } from '../../core/auth/useAuth';
 import { SettingsMeQuery } from '../settings/SettingsMeQuery';
+import { SignInUserLoginWithEmailMutation } from './SignInUserLoginWithEmailMutation';
+
+import { SignInUserLoginWithEmailMutation as SignInUserLoginWithEmailMutationType } from './__generated__/SignInUserLoginWithEmailMutation.graphql';
 
 export function SignIn() {
   const { navigate } = useNavigation();
@@ -23,24 +26,9 @@ export function SignIn() {
     []
   );
 
-  const [login, isLoading] = useMutation(graphql`
-    mutation SignInUserLoginWithEmailMutation(
-      $input: UserLoginWithEmailInput!
-    ) {
-      UserLoginWithEmail(input: $input) {
-        token
-        error
-        success
-        me {
-          _id
-          name
-          username
-          email
-          type
-        }
-      }
-    }
-  `);
+  const [login, isLoading] = useMutation<SignInUserLoginWithEmailMutationType>(
+    SignInUserLoginWithEmailMutation
+  );
 
   async function onLogin() {
     await refresh();

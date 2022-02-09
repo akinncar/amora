@@ -8,6 +8,8 @@ import { SettingsMeQuery } from './SettingsMeQuery';
 import { Button } from '../ui/Button';
 import { useAuth } from '../../core/auth/useAuth';
 
+import type { SettingsMeQuery as SettingsMeQueryType } from './__generated__/SettingsMeQuery.graphql';
+
 export function Settings() {
   const { navigate } = useNavigation();
   const { signOut } = useAuth();
@@ -19,7 +21,11 @@ export function Settings() {
     []
   );
 
-  const data = useLazyLoadQuery(SettingsMeQuery, {}, undefined);
+  const data = useLazyLoadQuery<SettingsMeQueryType>(
+    SettingsMeQuery,
+    {},
+    undefined
+  );
 
   return (
     <View
@@ -29,9 +35,17 @@ export function Settings() {
       }}
     >
       {data.me?._id ? (
-        <TouchableOpacity onPress={() => signOut(refresh)}>
-          <Text style={{ textAlign: 'center', fontWeight: 'bold' }}>Sair</Text>
-        </TouchableOpacity>
+        <>
+          <Text style={{ paddingVertical: 12, textAlign: 'center' }}>
+            Vpcê está logado como {data.me.email}
+          </Text>
+
+          <TouchableOpacity onPress={() => signOut(refresh)}>
+            <Text style={{ textAlign: 'center', fontWeight: 'bold' }}>
+              Sair
+            </Text>
+          </TouchableOpacity>
+        </>
       ) : (
         <>
           <Button

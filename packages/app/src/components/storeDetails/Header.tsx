@@ -4,7 +4,11 @@ import { useNavigation, useRoute } from '@react-navigation/native';
 
 import { graphql, useLazyLoadQuery } from 'react-relay';
 
+import { useAuth } from '../../core/auth/useAuth';
+
 export function Header({ store, userPoints }) {
+  const { token } = useAuth();
+
   return (
     <View
       style={{
@@ -28,11 +32,11 @@ export function Header({ store, userPoints }) {
           <Text>{store?.description}</Text>
         </View>
       </View>
-      {userPoints?.points && (
+      {token && (
         <View style={{ justifyContent: 'center' }}>
           <Text style={{ fontWeight: 'bold' }}>Você tem</Text>
           <Text style={{ alignSelf: 'center' }}>
-            {userPoints.points} pontos
+            {userPoints?.points || 0} pontos
           </Text>
         </View>
       )}

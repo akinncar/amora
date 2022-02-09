@@ -10,13 +10,15 @@ import { Button } from '../ui/Button';
 import { useAuth } from '../../core/auth/useAuth';
 import { StoreDetailsQuery } from './StoreDetailsQuery';
 
+import type { StoreDetailsQuery as StoreDetailsQueryType } from './__generated__/StoreDetailsQuery.graphql';
+
 export function StoreDetails() {
   const { navigate } = useNavigation();
   const { token } = useAuth();
   const { params } = useRoute();
   const { storeId } = params;
 
-  const data = useLazyLoadQuery(
+  const data = useLazyLoadQuery<StoreDetailsQueryType>(
     StoreDetailsQuery,
     { storeId },
     { fetchPolicy: 'store-and-network', fetchKey: new Date().toString() }
