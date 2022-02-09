@@ -9,8 +9,8 @@ import { AntDesign, Feather } from '@expo/vector-icons';
 
 import { Home } from './components/home/Home';
 import { Settings } from './components/settings/Settings';
-import { SignUp } from './components/signUp/SignUp';
-import { SignIn } from './components/signIn/SignIn';
+import { SignUp } from './components/auth/SignUp';
+import { SignIn } from './components/auth/SignIn';
 import { StoreDetails } from './components/storeDetails/StoreDetails';
 import { QrCode } from './components/qrCode/QrCode';
 

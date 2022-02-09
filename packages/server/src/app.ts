@@ -8,7 +8,7 @@ import koaPlayground from 'graphql-playground-middleware-koa';
 import cors from '@koa/cors';
 import bodyParser from 'koa-bodyparser';
 
-// import { getUser } from "./getUser";
+import { getUser } from './auth';
 import { schema } from './schema/schema';
 
 // import { auth } from "./auth";
@@ -19,7 +19,7 @@ const router = new Router();
 // router.use(auth);
 
 const graphqlSettingsPerReq = async (req, ctx, koaContext) => {
-  const { user, team } = koaContext;
+  const { user } = await getUser(req.header.authorization);
   const dataloaders = getDataloaders();
 
   return {
@@ -27,7 +27,6 @@ const graphqlSettingsPerReq = async (req, ctx, koaContext) => {
     schema,
     context: {
       user,
-      team,
       req,
       dataloaders,
     },

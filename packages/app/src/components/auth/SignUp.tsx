@@ -40,7 +40,12 @@ export function SignUp() {
     if (data.UserRegisterWithEmail.error)
       return Alert.alert(data.UserRegisterWithEmail.error);
 
-    return Alert.alert('Sucesso ao criar sua conta!');
+    return Alert.alert('Sucesso ao criar sua conta!', undefined, [
+      {
+        text: 'OK',
+        onPress: () => navigate('SignIn'),
+      },
+    ]);
   }
 
   function handleSubmit() {

@@ -36,6 +36,7 @@
   "devDependencies": {
     "@koa/cors": "^3.1.0",
     "@types/bcrypt": "^5.0.0",
+    "@types/jsonwebtoken": "^8.5.8",
     "@types/koa": "^2.13.4",
     "@types/koa-bodyparser": "^4.3.4",
     "@types/koa-graphql": "^0.8.5",

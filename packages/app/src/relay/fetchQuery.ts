@@ -7,20 +7,26 @@ import {
 
 import { API_URL } from '@env'
 
+import { getAuthToken } from '../core/auth/security'
+
 // Define a function that fetches the results of an operation (query/mutation/etc)
 // and returns its results as a Promise:
-export function fetchQuery(
+export async function fetchQuery(
   operation: any,
   variables: any,
   cacheConfig: any,
   uploadables: any,
 ) {
+  const authorization = await getAuthToken();
+
+  const headers = {
+    'content-type': 'application/json',
+    authorization,
+  };
+
   return fetch(`${API_URL}/graphql`, {
     method: 'POST',
-    headers: {
-      // Add authentication and other headers here
-      'content-type': 'application/json'
-    },
+    headers,
     body: JSON.stringify({
       query: operation.text, // GraphQL text from input
       variables,

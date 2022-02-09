@@ -1,4 +1,4 @@
-import { GraphQLNonNull, GraphQLObjectType, GraphQLString, GraphQLID } from 'graphql';
+import { GraphQLID, GraphQLNonNull, GraphQLObjectType, GraphQLString } from 'graphql';
 
 import { withFilter } from '../graphql/withFilter'
 
@@ -28,8 +28,10 @@ export default new GraphQLObjectType({
     },
     me: {
       type: UserType,
-      resolve: (root, args, context) =>
-        UserLoader.load(context, context.user?._id),
+      resolve: (root, args, context) => {
+          console.log({context});
+          return UserLoader.load(context, context.user?._id)
+        }
     },
     users: {
       type: GraphQLNonNull(UserConnection.connectionType),
