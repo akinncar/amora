@@ -3,6 +3,7 @@ import { GraphQLObjectType } from 'graphql';
 import UserMutations from '../modules/user/mutations';
 import StoreMutations from '../modules/store/mutations';
 import ProductMutations from '../modules/product/mutations';
+import UserPointsMutations from '../modules/userPoints/mutations';
 
 export default new GraphQLObjectType({
   name: 'Mutation',
@@ -11,5 +12,6 @@ export default new GraphQLObjectType({
     ...UserMutations,
     ...StoreMutations,
     ...ProductMutations,
+    ...UserPointsMutations,
   }),
 });

@@ -11,6 +11,10 @@ import * as StoreLoader from '../modules/store/StoreLoader';
 import ProductType, { ProductConnection } from '../modules/product/ProductType';
 import * as ProductLoader from '../modules/product/ProductLoader';
 
+import UserPointsType, { UserPointsConnection } from '../modules/userPoints/UserPointsType';
+import * as UserPointsLoader from '../modules/userPoints/UserPointsLoader';
+
+
 import { nodeField, nodesField } from '../modules/node/typeRegister';
 import { connectionArgs } from '../graphql/connectionDefinitions';
 
@@ -68,6 +72,27 @@ export default new GraphQLObjectType({
       },
       resolve: async (_, args, context) =>
         ProductLoader.loadAll(context, withFilter(args, { storeId: args.storeId })),
+    },
+    userPoints: {
+      type: GraphQLNonNull(UserPointsConnection.connectionType),
+      args: {
+        ...connectionArgs,
+      },
+      resolve: async (_, args, context) =>
+        await UserPointsLoader.loadAll(context, args),
+    },
+    userPointsByStoreIdAndUserId: {
+      type: GraphQLNonNull(UserPointsConnection.connectionType),
+      args: {
+        storeId: {
+          type: new GraphQLNonNull(GraphQLID)
+        },
+        userId: {
+          type: new GraphQLNonNull(GraphQLID)
+        }
+      },
+      resolve: async (_, args, context) =>
+        UserPointsLoader.loadAll(context, withFilter(args, { storeId: args.storeId, userId: args.userId })),
     },
   }),
 });

@@ -23,6 +23,7 @@ const ProductSchema = new Schema(
     },
     storeId: {
       type: ObjectId,
+      ref: 'Store',
       required: false,
     },
   },
