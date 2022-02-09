@@ -1,14 +1,27 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { Alert, Text, TouchableOpacity, View } from 'react-native';
-import { graphql, useMutation } from 'react-relay';
+import { graphql, useMutation, useQueryLoader } from 'react-relay';
 
 import { useNavigation } from '@react-navigation/native';
 
 import { TextInput } from '../ui/TextInput';
 import { Button } from '../ui/Button';
+import { useAuth } from '../../core/auth/useAuth';
+import { SettingsMeQuery } from '../settings/SettingsMeQuery';
 
 export function SignIn() {
   const { navigate } = useNavigation();
+  const { signIn } = useAuth();
+
+  const [email, setEmail] = useState('akinn@teste.com');
+  const [password, setPassword] = useState('123');
+
+  const [, loadQuery] = useQueryLoader(SettingsMeQuery);
+
+  const refresh = useCallback(
+    () => loadQuery({}, { fetchPolicy: 'network-only' }),
+    []
+  );
 
   const [login, isLoading] = useMutation(graphql`
     mutation SignInUserLoginWithEmailMutation(
@@ -29,14 +42,22 @@ export function SignIn() {
     }
   `);
 
-  const [email, setEmail] = useState('akinn@teste.com');
-  const [password, setPassword] = useState('123');
+  async function onLogin() {
+    await refresh();
+    return navigate('Settings');
+  }
 
   function onCompleted(data) {
     if (data.UserLoginWithEmail.error)
       return Alert.alert(data.UserLoginWithEmail.error);
 
-    return Alert.alert('Logado com sucesso!');
+    if (data.UserLoginWithEmail?.token) {
+      signIn(data.UserLoginWithEmail?.token, () =>
+        Alert.alert('Logado com sucesso!', undefined, [
+          { text: 'OK', onPress: onLogin },
+        ])
+      );
+    }
   }
 
   function handleSubmit() {

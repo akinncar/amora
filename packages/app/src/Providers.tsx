@@ -2,6 +2,7 @@ import React from 'react';
 import { RelayEnvironmentProvider } from 'react-relay';
 
 import Environment from './relay/Environment';
+import { AuthProvider } from './core/auth/AuthContext';
 
 type Props = {
   readonly children: React.ReactNode;
@@ -10,7 +11,7 @@ type Props = {
 const Providers = ({ children, environment = Environment }: Props) => {
   return (
     <RelayEnvironmentProvider environment={environment}>
-      {children}
+      <AuthProvider>{children}</AuthProvider>
     </RelayEnvironmentProvider>
   );
 };
