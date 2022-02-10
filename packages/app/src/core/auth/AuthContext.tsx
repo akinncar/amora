@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 
 import { getAuthToken, updateAuthToken } from './security';
 
@@ -10,27 +10,40 @@ export const AuthProvider = ({
 }: {
   readonly children: React.ReactNode;
 }) => {
-  const [userToken, setUserToken] = useState<any>(() => getAuthToken());
+  const [userToken, setUserToken] = useState<any>();
+  const [userType, setUserType] = useState<any>('customer'); // customer or provider
 
-  const signIn = useCallback<any>((token, callback) => {
+  const signIn = useCallback<any>((token, type, callback) => {
     updateAuthToken(token);
     setUserToken(token);
+    setUserType(type);
     return callback();
   }, []);
 
   const signOut = useCallback<any>(callback => {
     setUserToken(null);
     updateAuthToken();
+    setUserType('customer');
     return callback();
+  }, []);
+
+  async function loadAuthToken() {
+    const authToken = await getAuthToken();
+    setUserToken(authToken);
+  }
+
+  useEffect(() => {
+    loadAuthToken();
   }, []);
 
   const value = useMemo<any>(
     () => ({
       token: userToken,
+      type: userType,
       signIn,
       signOut,
     }),
-    [userToken, signIn, signOut]
+    [userToken, userType, signIn, signOut]
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

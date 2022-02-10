@@ -7,6 +7,7 @@ import { useNavigation } from '@react-navigation/native';
 import { TextInput } from '../ui/TextInput';
 import { Button } from '../ui/Button';
 import { useAuth } from '../../core/auth/useAuth';
+import { HomeStoreListQuery } from '../home/HomeStoreListQuery';
 import { SettingsMeQuery } from '../settings/SettingsMeQuery';
 import { SignInUserLoginWithEmailMutation } from './SignInUserLoginWithEmailMutation';
 
@@ -16,13 +17,18 @@ export function SignIn() {
   const { navigate } = useNavigation();
   const { signIn } = useAuth();
 
-  const [email, setEmail] = useState('akinn@teste.com');
+  const [email, setEmail] = useState('akinn@provider.com');
   const [password, setPassword] = useState('123');
 
-  const [, loadQuery] = useQueryLoader(SettingsMeQuery);
+  const [, loadQueryHome] = useQueryLoader(HomeStoreListQuery);
+  const [, loadQuerySettings] = useQueryLoader(SettingsMeQuery);
 
-  const refresh = useCallback(
-    () => loadQuery({}, { fetchPolicy: 'network-only' }),
+  const refreshHome = useCallback(
+    () => loadQueryHome({}, { fetchPolicy: 'network-only' }),
+    []
+  );
+  const refreshSettings = useCallback(
+    () => loadQuerySettings({}, { fetchPolicy: 'network-only' }),
     []
   );
 
@@ -31,8 +37,9 @@ export function SignIn() {
   );
 
   async function onLogin() {
-    await refresh();
-    return navigate('Settings');
+    await refreshHome();
+    await refreshSettings();
+    return navigate('Home');
   }
 
   function onCompleted(data) {
@@ -40,10 +47,13 @@ export function SignIn() {
       return Alert.alert(data.UserLoginWithEmail.error);
 
     if (data.UserLoginWithEmail?.token) {
-      signIn(data.UserLoginWithEmail?.token, () =>
-        Alert.alert('Logado com sucesso!', undefined, [
-          { text: 'OK', onPress: onLogin },
-        ])
+      signIn(
+        data.UserLoginWithEmail?.token,
+        data.UserLoginWithEmail?.me.type,
+        () =>
+          Alert.alert('Logado com sucesso!', undefined, [
+            { text: 'OK', onPress: onLogin },
+          ])
       );
     }
   }

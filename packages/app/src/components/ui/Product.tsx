@@ -2,12 +2,12 @@ import React from 'react';
 import { Image, Text, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
-import { Button } from '../ui/Button';
+import { Button } from './Button';
 import { useAuth } from '../../core/auth/useAuth';
 
-export function Product({ product, userPoints }) {
+export function Product({ product, userPoints = 0 }) {
   const { _id, pictureUrl, name, description, points } = product;
-  const { token } = useAuth();
+  const { token, type } = useAuth();
 
   const { navigate } = useNavigation();
 
@@ -33,7 +33,7 @@ export function Product({ product, userPoints }) {
           <Text>{points} pontos</Text>
         </View>
       </View>
-      {token && (
+      {token && type === 'customer' && (
         <Button
           onPress={() => navigate('QrCode')}
           title="Resgatar"

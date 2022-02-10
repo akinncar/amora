@@ -5,7 +5,7 @@ import { useNavigation, useRoute } from '@react-navigation/native';
 import { graphql, useLazyLoadQuery } from 'react-relay';
 
 import { Header } from './Header';
-import { Product } from './Product';
+import { Product } from '../ui/Product';
 import { Button } from '../ui/Button';
 import { useAuth } from '../../core/auth/useAuth';
 import { StoreDetailsQuery } from './StoreDetailsQuery';

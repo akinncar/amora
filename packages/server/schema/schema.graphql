@@ -19,6 +19,8 @@ type Query {
   productsByStoreId(storeId: ID!): ProductConnection!
   userPoints(after: String, first: Int, before: String, last: Int): UserPointsConnection!
   userPointsByStoreIdAndUserId(storeId: ID!, userId: ID): UserPointsConnection!
+  userStore(after: String, first: Int, before: String, last: Int): UserStoreConnection!
+  userStoreByUserId(userId: ID): UserStoreConnection!
 }
 
 """An object with an ID"""
@@ -135,6 +137,7 @@ type Store implements Node {
   name: String
   description: String
   pictureUrl: String
+  products: ProductConnection!
 }
 
 """A connection to a list of items."""
@@ -233,6 +236,53 @@ type UserPoints implements Node {
   userId: ID
 }
 
+"""A connection to a list of items."""
+type UserStoreConnection {
+  """Number of items in this connection"""
+  count: Int
+
+  """
+  A count of the total number of objects in this connection, ignoring pagination.
+      This allows a client to fetch the first five objects by passing "5" as the
+      argument to "first", then fetch the total count so it could display "5 of 83",
+      for example.
+  """
+  totalCount: Int
+
+  """Offset from start"""
+  startCursorOffset: Int!
+
+  """Offset till end"""
+  endCursorOffset: Int!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfoExtended!
+
+  """A list of edges."""
+  edges: [UserStoreEdge]!
+}
+
+"""An edge in a connection."""
+type UserStoreEdge {
+  """The item at the end of the edge"""
+  node: UserStore
+
+  """A cursor for use in pagination"""
+  cursor: String!
+}
+
+"""UserStore data"""
+type UserStore implements Node {
+  """The ID of an object"""
+  id: ID!
+
+  """mongoose _id"""
+  _id: String!
+  storeId: ID
+  userId: ID
+  store: Store
+}
+
 """Root of ... mutations"""
 type Mutation {
   UserLoginWithEmail(input: UserLoginWithEmailInput!): UserLoginWithEmailPayload
@@ -240,6 +290,7 @@ type Mutation {
   StoreCreate(input: StoreCreateInput!): StoreCreatePayload
   ProductCreate(input: ProductCreateInput!): ProductCreatePayload
   UserPointsCreateOrUpdate(input: UserPointsCreateOrUpdateInput!): UserPointsCreateOrUpdatePayload
+  UserStoreCreate(input: UserStoreCreateInput!): UserStoreCreatePayload
 }
 
 type UserLoginWithEmailPayload {
@@ -311,6 +362,19 @@ type UserPointsCreateOrUpdatePayload {
 
 input UserPointsCreateOrUpdateInput {
   points: Int!
+  storeId: ID!
+  userId: ID!
+  clientMutationId: String
+}
+
+type UserStoreCreatePayload {
+  userStore: UserStore
+  error: String
+  success: String
+  clientMutationId: String
+}
+
+input UserStoreCreateInput {
   storeId: ID!
   userId: ID!
   clientMutationId: String

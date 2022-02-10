@@ -37,7 +37,7 @@ export function Settings() {
       {data.me?._id ? (
         <>
           <Text style={{ paddingVertical: 12, textAlign: 'center' }}>
-            Vpcê está logado como {data.me.email}
+            Você está logado como {data.me.email}
           </Text>
 
           <TouchableOpacity onPress={() => signOut(refresh)}>

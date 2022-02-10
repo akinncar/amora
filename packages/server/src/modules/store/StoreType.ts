@@ -1,4 +1,4 @@
-import { GraphQLList, GraphQLObjectType, GraphQLString } from 'graphql';
+import { GraphQLList, GraphQLNonNull, GraphQLObjectType, GraphQLString } from 'graphql';
 import { globalIdField } from 'graphql-relay';
 import { objectIdResolver } from '@entria/graphql-mongo-helpers';
 
@@ -8,6 +8,11 @@ import { nodeInterface, registerTypeLoader } from '../node/typeRegister';
 
 import { load } from './StoreLoader';
 import { connectionDefinitions } from '../../graphql/connectionDefinitions';
+import { withFilter } from '../../graphql/withFilter'
+
+import ProductType, { ProductConnection } from '../../modules/product/ProductType';
+import Product from '../product/ProductModel';
+import * as ProductLoader from '../product/ProductLoader';
 
 const StoreType = new GraphQLObjectType({
   name: 'Store',
@@ -26,6 +31,19 @@ const StoreType = new GraphQLObjectType({
     pictureUrl: {
       type: GraphQLString,
       resolve: (store) => store.pictureUrl,
+    },
+    // products: {
+    //   type: GraphQLList(ProductType),
+    //   resolve: async (store) => {
+    //     return await Product.find({
+    //       storeId: store._id,
+    //     });
+    //   },
+    // },
+    products: {
+      type: GraphQLNonNull(ProductConnection.connectionType),
+      resolve: async (store, args, context) => 
+        ProductLoader.loadAll(context, withFilter(args, { storeId: store._id })),
     },
   }),
   interfaces: () => [nodeInterface],

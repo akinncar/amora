@@ -12,5 +12,28 @@ export const HomeStoreListQuery = graphql`
         }
       }
     }
+    userStoreByUserId {
+      edges {
+        node {
+          _id
+          storeId
+          userId
+          store {
+            _id
+            name
+            products {
+              edges {
+                node {
+                  _id
+                  name
+                  pictureUrl
+                  points
+                }
+              }
+            }
+          }
+        }
+      }
+    }
   }
 `;

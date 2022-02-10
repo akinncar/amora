@@ -13,13 +13,14 @@ import { SignUp } from './components/auth/SignUp';
 import { SignIn } from './components/auth/SignIn';
 import { StoreDetails } from './components/storeDetails/StoreDetails';
 import { QrCode } from './components/qrCode/QrCode';
+import { ScanQrCode } from './components/qrCode/ScanQrCode';
 import { useAuth } from './core/auth/useAuth';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
 function BottomTab() {
-  const { token } = useAuth();
+  const { token, type } = useAuth();
 
   return (
     <Tab.Navigator>
@@ -27,7 +28,8 @@ function BottomTab() {
         name="Home"
         component={Home}
         options={{
-          headerTitle: 'Estabelecimentos',
+          headerTitle:
+            type === 'customer' ? 'Estabelecimentos' : 'Seus produtos',
           tabBarLabel: () => {
             return null;
           },
@@ -36,7 +38,7 @@ function BottomTab() {
           ),
         }}
       />
-      {token && (
+      {token && type === 'customer' && (
         <Tab.Screen
           name="MenuQrCode"
           component={QrCode}
@@ -56,7 +58,26 @@ function BottomTab() {
           })}
         />
       )}
-
+      {token && type === 'provider' && (
+        <Tab.Screen
+          name="MenuScanQrCode"
+          component={ScanQrCode}
+          options={{
+            tabBarLabel: () => {
+              return null;
+            },
+            tabBarIcon: ({ color }) => (
+              <AntDesign name="scan1" color={color} size={26} />
+            ),
+          }}
+          listeners={({ navigation }) => ({
+            tabPress: e => {
+              e.preventDefault();
+              return navigation.navigate('ScanQrCode');
+            },
+          })}
+        />
+      )}
       <Tab.Screen
         name="Settings"
         component={Settings}
@@ -139,7 +160,24 @@ export function Routes() {
               ),
             })}
           />
+          <Stack.Screen
+            name="ScanQrCode"
+            component={ScanQrCode}
+            options={({ navigation }) => ({
+              headerTitle: 'Aponte para um QRCode',
+              headerLeft: () => null,
+              headerRight: () => (
+                <TouchableOpacity
+                  onPress={() => navigation.goBack()}
+                  style={{ padding: 8, marginRight: 8 }}
+                >
+                  <Feather name="x" size={24} />
+                </TouchableOpacity>
+              ),
+            })}
+          />
         </Stack.Group>
+
         <Stack.Screen
           name="StoreDetails"
           component={StoreDetails}
