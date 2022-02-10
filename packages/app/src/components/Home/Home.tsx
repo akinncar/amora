@@ -1,8 +1,8 @@
 import React, { Suspense } from 'react';
-import { Text, View } from 'react-native';
-import { FlatList } from 'react-native-gesture-handler';
+import { FlatList, Text, View } from 'react-native';
 
-import { graphql, useLazyLoadQuery } from 'react-relay';
+import { useNavigation } from '@react-navigation/native';
+import { useLazyLoadQuery } from 'react-relay';
 
 import { NewProduct } from './NewProduct';
 import { useAuth } from '../../core/auth/useAuth';
@@ -14,6 +14,7 @@ import type { HomeStoreListQuery as HomeStoreListQueryType } from './__generated
 
 export function Home() {
   const { type } = useAuth();
+  const { navigate } = useNavigation();
 
   const data = useLazyLoadQuery<HomeStoreListQueryType>(
     HomeStoreListQuery,
@@ -21,12 +22,10 @@ export function Home() {
     { fetchPolicy: 'network-only' }
   );
 
-  console.log();
-  console.log({ type });
-
   if (type === 'provider') {
-    if (data.userStoreByUserId.edges.length < 0) {
-      return <Text>Create</Text>;
+    if (data.userStoreByUserId.edges.length < 1) {
+      navigate('CreateStore');
+      return <></>;
     }
 
     return (
@@ -34,7 +33,11 @@ export function Home() {
         data={data?.userStoreByUserId?.edges[0]?.node?.store?.products?.edges}
         renderItem={({ item: { node } }) => <Product product={node} />}
         keyExtractor={({ node }) => node._id.toString()}
-        ListHeaderComponent={() => <NewProduct />}
+        ListHeaderComponent={() => (
+          <NewProduct
+            storeId={data.userStoreByUserId.edges[0]?.node?.storeId}
+          />
+        )}
       />
     );
   }

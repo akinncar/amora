@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 
 import { getAuthToken, updateAuthToken } from './security';
+import { getUserType, updateUserType } from './userType';
 
 // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 export const AuthContext = React.createContext<any>(null!);
@@ -16,6 +17,7 @@ export const AuthProvider = ({
   const signIn = useCallback<any>((token, type, callback) => {
     updateAuthToken(token);
     setUserToken(token);
+    updateUserType(type);
     setUserType(type);
     return callback();
   }, []);
@@ -23,17 +25,21 @@ export const AuthProvider = ({
   const signOut = useCallback<any>(callback => {
     setUserToken(null);
     updateAuthToken();
+    updateUserType('customer');
     setUserType('customer');
     return callback();
   }, []);
 
-  async function loadAuthToken() {
+  async function init() {
     const authToken = await getAuthToken();
     setUserToken(authToken);
+    console.log({ authToken });
+    const type = await getUserType();
+    setUserType(type);
   }
 
   useEffect(() => {
-    loadAuthToken();
+    init();
   }, []);
 
   const value = useMemo<any>(

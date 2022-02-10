@@ -1,4 +1,6 @@
 import { GraphQLID, GraphQLNonNull, GraphQLObjectType, GraphQLString } from 'graphql';
+import mongoose, { Document, Model, Types } from 'mongoose';
+const { ObjectId } = mongoose.Schema.Types;
 
 import { withFilter } from '../graphql/withFilter'
 
@@ -110,7 +112,11 @@ export default new GraphQLObjectType({
         }
       },
       resolve: async (_, args, context) =>
-      UserStoreLoader.loadAll(context, withFilter(args, { userId: args.userId || context.user?._id })),
+        {
+          console.log(args.userId);
+          console.log(context.user?._id);
+          return UserStoreLoader.loadAll(context, withFilter(args, { userId: args.userId || context.user?._id }))
+        }
     },
   }),
 });

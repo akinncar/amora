@@ -50,7 +50,7 @@ export function SignUp() {
       variables: {
         input: {
           name,
-          email,
+          email: email.toLowerCase(),
           password,
           type,
         },

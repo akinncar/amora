@@ -8,6 +8,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { AntDesign, Feather } from '@expo/vector-icons';
 
 import { Home } from './components/home/Home';
+import { CreateStore } from './components/home/CreateStore';
 import { Settings } from './components/settings/Settings';
 import { SignUp } from './components/auth/SignUp';
 import { SignIn } from './components/auth/SignIn';
@@ -114,7 +115,6 @@ export function Routes() {
               headerTitle: 'Criar sua conta',
               // headerBackTitleVisible: false,
               headerLeft: () => null,
-
               headerRight: () => (
                 <TouchableOpacity
                   onPress={() => navigation.goBack()}
@@ -177,7 +177,16 @@ export function Routes() {
             })}
           />
         </Stack.Group>
-
+        <Stack.Group screenOptions={{ presentation: 'modal' }}>
+          <Stack.Screen
+            name="CreateStore"
+            component={CreateStore}
+            options={() => ({
+              headerTitle: 'Cadastre seu Estabelecimento',
+              headerLeft: () => null,
+            })}
+          />
+        </Stack.Group>
         <Stack.Screen
           name="StoreDetails"
           component={StoreDetails}

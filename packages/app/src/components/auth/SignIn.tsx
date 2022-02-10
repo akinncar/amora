@@ -67,7 +67,7 @@ export function SignIn() {
     login({
       variables: {
         input: {
-          email,
+          email: email.toLowerCase(),
           password,
         },
       },

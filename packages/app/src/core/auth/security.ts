@@ -6,8 +6,8 @@ export const getAuthToken = () => AsyncStorage.getItem(JWT_TOKEN_KEY);
 
 export const updateAuthToken = (token?: any) => {
   if (!token) {
-    AsyncStorage.removeItem(JWT_TOKEN_KEY);
+    return AsyncStorage.removeItem(JWT_TOKEN_KEY);
   } else {
-    AsyncStorage.setItem(JWT_TOKEN_KEY, token);
+    return AsyncStorage.setItem(JWT_TOKEN_KEY, token);
   }
 };
