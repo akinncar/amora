@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { FlatList, SafeAreaView, View } from 'react-native';
 import { useNavigation, useRoute } from '@react-navigation/native';
 
-import { graphql, useLazyLoadQuery } from 'react-relay';
+import { useLazyLoadQuery, useQueryLoader } from 'react-relay';
 
 import { Header } from './Header';
 import { Product } from '../ui/Product';
@@ -24,8 +24,22 @@ export function StoreDetails() {
     { fetchPolicy: 'store-and-network', fetchKey: new Date().toString() }
   );
 
+  const [, loadQueryStoreDetails] = useQueryLoader(StoreDetailsQuery);
+  const refrehStoreDetails = useCallback(
+    () => loadQueryStoreDetails({}, { fetchPolicy: 'network-only' }),
+    []
+  );
+
   const userPoints =
-    data?.userPoints?.edges.length > 0 ? data?.userPoints?.edges[0].node : {};
+    data?.userPoints?.edges.length > 0
+      ? data?.userPoints?.edges[0].node
+      : { points: 0 };
+
+  useEffect(() => {
+    setInterval(() => {
+      refrehStoreDetails();
+    }, 3000);
+  }, []);
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: '#FFF' }}>

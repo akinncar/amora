@@ -12,18 +12,6 @@ export const HomeStoreListQuery = graphql`
         }
       }
     }
-    products: productsByStoreId(storeId: $storeId) {
-      edges {
-        node {
-          _id
-          name
-          description
-          pictureUrl
-          points
-          storeId
-        }
-      }
-    }
     userStoreByUserId {
       edges {
         node {
