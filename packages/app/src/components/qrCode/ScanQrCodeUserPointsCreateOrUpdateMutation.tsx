@@ -11,6 +11,7 @@ export const ScanQrCodeUserPointsCreateOrUpdateMutation = graphql`
         storeId
         userId
       }
+      success
       error
     }
   }

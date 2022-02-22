@@ -42,9 +42,9 @@ export function Product({ product, userPoints = { points: 0 } }) {
           disabled={userPoints.points < points}
         />
       )}
-      {token && type === 'provider' && (
-        <Button onPress={() => {}} title="Deletar" />
-      )}
+      {/* {token && type === 'provider' && (
+        <Button onPress={() => {}} title="Excluir" />
+      )} */}
     </View>
   );
 }

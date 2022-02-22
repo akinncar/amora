@@ -35,17 +35,24 @@ export function ScanQrCode() {
     })();
   }, []);
 
-  const handleAddUserPoints = () => {
-    // updateUserPoints({
-    //   variables: {
-    //     input: {
-    //       points: 3,
-    //       storeId: '61aeb2262dcb61ccd9f53ec2',
-    //       userId: '61f8998bec8106732ce6a98d',
-    //     },
-    //   },
-    //   onCompleted,
-    // });
+  const onCompleted = data => {
+    if (data.UserPointsCreateOrUpdate.error) {
+      return Alert.alert(data.UserPointsCreateOrUpdate.error);
+    }
+    return Alert.alert(data.UserPointsCreateOrUpdate.success);
+  };
+
+  const handleUpdateUserPoints = code => {
+    return updateUserPoints({
+      variables: {
+        input: {
+          points: code.points,
+          storeId: data?.userStoreByUserId?.edges[0].node.storeId,
+          userId: code.userId,
+        },
+      },
+      onCompleted,
+    });
   };
 
   const handleBarCodeScanned = ({ type, data }) => {
@@ -60,14 +67,14 @@ export function ScanQrCode() {
         } deste usuário?`,
         undefined,
         [
-          { text: 'Sim', onPress: () => {} },
+          { text: 'Sim', onPress: () => handleUpdateUserPoints(code) },
           { text: 'Não', onPress: () => setScanned(false), style: 'cancel' },
         ]
       );
     }
 
     return Alert.alert('Quer adicionar 1 ponto a este usuário?', undefined, [
-      { text: 'Sim', onPress: handleAddUserPoints },
+      { text: 'Sim', onPress: () => handleUpdateUserPoints(code) },
       { text: 'Não', onPress: () => setScanned(false), style: 'cancel' },
     ]);
   };

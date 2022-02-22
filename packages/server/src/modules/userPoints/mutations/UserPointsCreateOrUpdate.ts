@@ -21,19 +21,27 @@ export default mutationWithClientMutationId({
     },
   },
   mutateAndGetPayload: async ({ id, points, storeId, userId }) => {
+
     const hasUserPoints = await UserPoints.findOne({
       storeId: storeId,
       userId: userId,
     });
 
     if (hasUserPoints) {
+      const pointsUpdated = points === 0 ? hasUserPoints.points + 1 : hasUserPoints.points - points
+
+      if (pointsUpdated < 0) return {
+        id: hasUserPoints.id,
+        error: 'O usuário não possui pontos suficientes',
+      };
+
       await hasUserPoints.updateOne({
-        points, storeId, userId
+        points: pointsUpdated, storeId, userId
       })
 
       return {
         id: hasUserPoints.id,
-        success: 'User points register success',
+        success: 'Pontos do usuário atualizados com sucesso!',
       };
     }
 
@@ -46,7 +54,7 @@ export default mutationWithClientMutationId({
 
     return {
       id: userPoints.id,
-      success: 'User points register success',
+      success: 'Pontos do usuário atualizados com sucesso!',
     };
   },
   outputFields: {

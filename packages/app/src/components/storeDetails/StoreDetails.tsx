@@ -18,7 +18,7 @@ export function StoreDetails() {
   const { params } = useRoute();
   const { storeId } = params;
 
-  const data = useLazyLoadQuery<StoreDetailsQueryType>(
+  const data = useLazyLoadQuery<any>(
     StoreDetailsQuery,
     { storeId },
     { fetchPolicy: 'store-and-network', fetchKey: new Date().toString() }
@@ -29,6 +29,16 @@ export function StoreDetails() {
     () => loadQueryStoreDetails({}, { fetchPolicy: 'network-only' }),
     []
   );
+
+  const sortByPointsAsc = (a, b) => {
+    if (a.node.points < b.node.points) {
+      return -1;
+    }
+    if (a.node.points > b.node.points) {
+      return 1;
+    }
+    return 0;
+  };
 
   const userPoints =
     data?.userPoints?.edges.length > 0
@@ -44,7 +54,7 @@ export function StoreDetails() {
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: '#FFF' }}>
       <FlatList
-        data={data?.products?.edges}
+        data={[...data?.products?.edges].sort(sortByPointsAsc)}
         renderItem={({ item: { node } }) => (
           <Product product={node} userPoints={userPoints} />
         )}
