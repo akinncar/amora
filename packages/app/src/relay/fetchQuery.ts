@@ -20,9 +20,9 @@ export async function fetchQuery(
     authorization,
   };
 
-  const uri = `http://${manifest.debuggerHost.split(':').shift().concat(':9001')}`;
+  const uri = __DEV__ ? `http://${manifest.debuggerHost.split(':').shift().concat(':9001')}` : API_URL;
 
-  const response = await fetch(`${uri || API_URL}/graphql`, {
+  const response = await fetch(`${uri}/graphql`, {
     method: 'POST',
     headers,
     body: JSON.stringify({
