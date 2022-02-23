@@ -10,7 +10,7 @@
   "scripts": {
     "es": "node -r esbuild-register",
     "start": "yarn es ./src/index.ts -w",
-    "build": "esbuild ./src/index.ts --bundle --platform=node --outdir=lib",
+    "build": "esbuild ./src/index.ts --bundle --platform=node --outdir=dist --external:mock-aws-s3 --external:aws-sdk --external:nock",
     "update-schema": "yarn es ./scripts/updateSchema.ts --extensions \".es6,.js,.es,.jsx,.mjs,.ts\""
   },
   "dependencies": {
