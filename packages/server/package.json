@@ -14,7 +14,7 @@
   "scripts": {
     "es": "node -r esbuild-register",
     "start": "yarn es ./src/index.ts -w",
-    "build": "yarn es ./src/index.ts -w",
+    "build": "npm run es ./src/index.ts -w",
     "update-schema": "yarn es ./scripts/updateSchema.ts --extensions \".es6,.js,.es,.jsx,.mjs,.ts\""
   },
   "dependencies": {
