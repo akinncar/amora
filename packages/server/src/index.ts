@@ -21,9 +21,9 @@ import { environment, serverConf } from './shared/index';
 
   const server = createServer(app.callback());
 
-  console.log('process.env.PORT', process.env.PORT);
+  console.log('process.env.PORT', process.env.PORT || 9001);
 
-  server.listen(process.env.PORT, () => {
+  server.listen(process.env.PORT || 9001, () => {
     console.log('##########################################################');
     console.log('#####               STARTING SERVER                  #####');
     console.log('##########################################################\n');
@@ -33,7 +33,7 @@ import { environment, serverConf } from './shared/index';
       } ...`
     );
     console.log(
-      `GraphQL Server is now running on http://localhost:${process.env.PORT}/graphql`
+      `GraphQL Server is now running on http://localhost:${process.env.PORTprocess.env.PORT || 9001}/graphql`
     );
   });
 })();
