@@ -42,7 +42,7 @@ const StoreType = new GraphQLObjectType({
     //   },
     // },
     products: {
-      type: GraphQLNonNull(ProductConnection.connectionType),
+      type: new GraphQLNonNull(ProductConnection.connectionType),
       resolve: async (store, args, context) => 
         ProductLoader.loadAll(context, withFilter(args, { storeId: store._id })),
     },

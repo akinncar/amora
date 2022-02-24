@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { getDataloaders } from './graphql/loaderRegister';
 
 require('dotenv').config();

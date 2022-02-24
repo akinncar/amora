@@ -41,7 +41,7 @@ export default new GraphQLObjectType({
         UserLoader.load(context, context.user?._id)
     },
     users: {
-      type: GraphQLNonNull(UserConnection.connectionType),
+      type: new GraphQLNonNull(UserConnection.connectionType),
       args: {
         ...connectionArgs,
       },
@@ -49,7 +49,7 @@ export default new GraphQLObjectType({
         await UserLoader.loadAll(context, args),
     },
     stores: {
-      type: GraphQLNonNull(StoreConnection.connectionType),
+      type: new GraphQLNonNull(StoreConnection.connectionType),
       args: {
         ...connectionArgs,
       },
@@ -68,7 +68,7 @@ export default new GraphQLObjectType({
         StoreLoader.load(context, args.id),
     },
     productsByStoreId: {
-      type: GraphQLNonNull(ProductConnection.connectionType),
+      type: new GraphQLNonNull(ProductConnection.connectionType),
       args: {
         storeId: {
           type: new GraphQLNonNull(GraphQLID)
@@ -78,7 +78,7 @@ export default new GraphQLObjectType({
         ProductLoader.loadAll(context, withFilter(args, { storeId: args.storeId })),
     },
     userPoints: {
-      type: GraphQLNonNull(UserPointsConnection.connectionType),
+      type: new GraphQLNonNull(UserPointsConnection.connectionType),
       args: {
         ...connectionArgs,
       },
@@ -86,7 +86,7 @@ export default new GraphQLObjectType({
         await UserPointsLoader.loadAll(context, args),
     },
     userPointsByStoreIdAndUserId: {
-      type: GraphQLNonNull(UserPointsConnection.connectionType),
+      type: new GraphQLNonNull(UserPointsConnection.connectionType),
       args: {
         storeId: {
           type: new GraphQLNonNull(GraphQLID)
@@ -100,7 +100,7 @@ export default new GraphQLObjectType({
         UserPointsLoader.loadAll(context, withFilter(args, { storeId: args.storeId, userId: args.userId || context.user?._id })),
     },
     userStore: {
-      type: GraphQLNonNull(UserStoreConnection.connectionType),
+      type: new GraphQLNonNull(UserStoreConnection.connectionType),
       args: {
         ...connectionArgs,
       },
@@ -108,7 +108,7 @@ export default new GraphQLObjectType({
         await UserStoreLoader.loadAll(context, args),
     },
     userStoreByUserId: {
-      type: GraphQLNonNull(UserStoreConnection.connectionType),
+      type: new GraphQLNonNull(UserStoreConnection.connectionType),
       args: {
         userId: {
           type: GraphQLID,

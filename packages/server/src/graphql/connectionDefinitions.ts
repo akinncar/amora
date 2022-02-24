@@ -8,7 +8,6 @@ import {
     GraphQLNonNull,
     GraphQLObjectType,
     GraphQLString,
-    Thunk,
   } from 'graphql';
   
   export const forwardConnectionArgs: GraphQLFieldConfigArgumentMap = {
@@ -39,8 +38,8 @@ import {
     readonly nodeType: GraphQLObjectType;
     readonly resolveNode?: GraphQLFieldResolver<any, any> | null;
     readonly resolveCursor?: GraphQLFieldResolver<any, any> | null;
-    readonly edgeFields?: Thunk<GraphQLFieldConfigMap<any, any>> | null;
-    readonly connectionFields?: Thunk<GraphQLFieldConfigMap<any, any>> | null;
+    readonly edgeFields?: any | null;
+    readonly connectionFields?: any | null;
   };
   
   export type GraphQLConnectionDefinitions = {
@@ -53,11 +52,11 @@ import {
     description: 'Information about pagination in a connection.',
     fields: () => ({
       hasNextPage: {
-        type: GraphQLNonNull(GraphQLBoolean),
+        type: new GraphQLNonNull(GraphQLBoolean),
         description: 'When paginating forwards, are there more items?',
       },
       hasPreviousPage: {
-        type: GraphQLNonNull(GraphQLBoolean),
+        type: new GraphQLNonNull(GraphQLBoolean),
         description: 'When paginating backwards, are there more items?',
       },
       startCursor: {
@@ -71,7 +70,7 @@ import {
     }),
   });
   
-  function resolveMaybeThunk<T>(thingOrThunk: Thunk<T>): T {
+  function resolveMaybeThunk<T>(thingOrThunk: any): T {
     return typeof thingOrThunk === 'function'
       ? (thingOrThunk as () => T)()
       : thingOrThunk;
@@ -95,7 +94,7 @@ import {
           description: 'The item at the end of the edge',
         },
         cursor: {
-          type: GraphQLNonNull(GraphQLString),
+          type: new GraphQLNonNull(GraphQLString),
           resolve: resolveCursor,
           description: 'A cursor for use in pagination',
         },
@@ -120,19 +119,19 @@ import {
     for example.`,
         },
         startCursorOffset: {
-          type: GraphQLNonNull(GraphQLInt),
+          type: new GraphQLNonNull(GraphQLInt),
           description: 'Offset from start',
         },
         endCursorOffset: {
-          type: GraphQLNonNull(GraphQLInt),
+          type: new GraphQLNonNull(GraphQLInt),
           description: 'Offset till end',
         },
         pageInfo: {
-          type: GraphQLNonNull(pageInfoType),
+          type: new GraphQLNonNull(pageInfoType),
           description: 'Information to aid in pagination.',
         },
         edges: {
-          type: GraphQLNonNull(GraphQLList(edgeType)),
+          type: new GraphQLNonNull(new GraphQLList(edgeType)),
           description: 'A list of edges.',
         },
         ...(resolveMaybeThunk(connectionFields) as any),
