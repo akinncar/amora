@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { GraphQLList, GraphQLObjectType, GraphQLString } from 'graphql';
 import { globalIdField } from 'graphql-relay';
 import { objectIdResolver } from '@entria/graphql-mongo-helpers';

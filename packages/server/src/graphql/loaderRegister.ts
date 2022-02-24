@@ -1,3 +1,4 @@
+// @ts-nocheck
 export interface DataLoaders {
     // UserLoader: ReturnType<
     //   typeof import("../server/modules/user/UserLoader").getLoader

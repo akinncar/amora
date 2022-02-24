@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { GraphQLObjectType } from 'graphql';
 
 import { fromGlobalId, nodeDefinitions } from 'graphql-relay';

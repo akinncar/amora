@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { GraphQLNonNull, GraphQLString } from 'graphql';
 import { mutationWithClientMutationId } from 'graphql-relay';
 import bcrypt from 'bcrypt';

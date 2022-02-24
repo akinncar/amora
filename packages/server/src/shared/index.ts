@@ -1,5 +1,5 @@
 import SERVER_ENV from './server.config';
-import LOG_ENV from './logger.config.js';
+import LOG_ENV from './logger.config';
 
 const environment = process.env.NODE_ENV || 'development';
 

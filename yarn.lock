@@ -1745,6 +1745,13 @@
     "@types/keygrip" "*"
     "@types/node" "*"
 
+"@types/dotenv-safe@^8.1.2":
+  version "8.1.2"
+  resolved "https://registry.yarnpkg.com/@types/dotenv-safe/-/dotenv-safe-8.1.2.tgz#72f126969f445af5654efd3167deabc2cbc6c24e"
+  integrity sha512-R/B/wIMda6lRE2P1H0vwSoJsV78IOkhccE4vIvmKZQNXOIjiU0QyJsUXwSotBxOPZFZ/oOnjCa3+kK5kVJwGyw==
+  dependencies:
+    dotenv "^8.2.0"
+
 "@types/express-serve-static-core@^4.17.18":
   version "4.17.28"
   resolved "https://registry.yarnpkg.com/@types/express-serve-static-core/-/express-serve-static-core-4.17.28.tgz#c47def9f34ec81dc6328d0b1b5303d1ec98d86b8"

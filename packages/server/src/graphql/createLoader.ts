@@ -1,3 +1,4 @@
+// @ts-nocheck
 // eslint-disable-next-line
 import { mongooseLoader } from "@entria/graphql-mongoose-loader";
 import DataLoader from 'dataloader';

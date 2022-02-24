@@ -37,7 +37,8 @@ export default new GraphQLObjectType({
     me: {
       type: UserType,
       resolve: (root, args, context) => 
-       UserLoader.load(context, context.user?._id)
+        // @ts-ignore
+        UserLoader.load(context, context.user?._id)
     },
     users: {
       type: GraphQLNonNull(UserConnection.connectionType),
@@ -63,6 +64,7 @@ export default new GraphQLObjectType({
         }
       },
       resolve: async (_, args, context) =>
+        // @ts-ignore
         StoreLoader.load(context, args.id),
     },
     productsByStoreId: {
@@ -94,6 +96,7 @@ export default new GraphQLObjectType({
         }
       },
       resolve: async (_, args, context) =>
+        // @ts-ignore
         UserPointsLoader.loadAll(context, withFilter(args, { storeId: args.storeId, userId: args.userId || context.user?._id })),
     },
     userStore: {
@@ -113,8 +116,7 @@ export default new GraphQLObjectType({
       },
       resolve: async (_, args, context) =>
         {
-          console.log(args.userId);
-          console.log(context.user?._id);
+          // @ts-ignore
           return UserStoreLoader.loadAll(context, withFilter(args, { userId: args.userId || context.user?._id }))
         }
     },

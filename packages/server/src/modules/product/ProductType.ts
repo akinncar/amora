@@ -1,4 +1,5 @@
-import { GraphQLID, GraphQLObjectType, GraphQLString, GraphQLInt } from 'graphql';
+// @ts-nocheck
+import { GraphQLID, GraphQLInt, GraphQLObjectType, GraphQLString } from 'graphql';
 import { globalIdField } from 'graphql-relay';
 import { objectIdResolver } from '@entria/graphql-mongo-helpers';
 
