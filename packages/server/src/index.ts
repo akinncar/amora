@@ -33,7 +33,7 @@ import { environment, serverConf } from './shared/index';
       } ...`
     );
     console.log(
-      `GraphQL Server is now running on http://localhost:${process.env.PORTprocess.env.PORT || 9001}/graphql`
+      `GraphQL Server is now running on http://localhost:${process.env.PORT || 9001}/graphql`
     );
   });
 })();
