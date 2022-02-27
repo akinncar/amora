@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { ActivityIndicator, StyleSheet, View } from 'react-native';
+import { ActivityIndicator, StyleSheet, Text, View } from 'react-native';
 
 import { BarCodeScanner } from 'expo-barcode-scanner';
 import { useLazyLoadQuery, useMutation } from 'react-relay';
+import { Camera } from 'expo-camera';
 
 import { Button } from '../ui/Button';
 import Alert from '../ui/Alert';
@@ -80,12 +81,17 @@ export function ScanQrCode() {
     ]);
   };
 
-  if (isLoading)
+  if (isLoading) {
     return (
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
         <ActivityIndicator />
       </View>
     );
+  }
+
+  if (hasPermission === false) {
+    return <Text>Sem acesso a camera</Text>;
+  }
 
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
@@ -96,10 +102,17 @@ export function ScanQrCode() {
           onPress={() => setScanned(false)}
         />
       ) : (
-        <BarCodeScanner
-          onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
+        <Camera
           style={StyleSheet.absoluteFillObject}
+          onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
+          barCodeScannerSettings={{
+            barCodeTypes: [BarCodeScanner.Constants.BarCodeType.qr],
+          }}
         />
+        // <BarCodeScanner
+        //   onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
+        //   style={StyleSheet.absoluteFillObject}
+        // />
       )}
     </View>
   );
