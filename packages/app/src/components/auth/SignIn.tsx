@@ -1,11 +1,12 @@
 import React, { useCallback, useState } from 'react';
-import { Alert, View } from 'react-native';
+import { View } from 'react-native';
 import { useMutation, useQueryLoader } from 'react-relay';
 
 import { useNavigation } from '@react-navigation/native';
 
 import { TextInput } from '../ui/TextInput';
 import { Button } from '../ui/Button';
+import Alert from '../ui/Alert';
 import { useAuth } from '../../core/auth/useAuth';
 import { HomeStoreListQuery } from '../home/HomeStoreListQuery';
 import { SettingsMeQuery } from '../settings/SettingsMeQuery';

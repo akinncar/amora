@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ActivityIndicator, Alert, ScrollView, View } from 'react-native';
+import { ActivityIndicator, ScrollView, View } from 'react-native';
 import { useMutation } from 'react-relay';
 
 import { useNavigation } from '@react-navigation/native';
@@ -7,6 +7,7 @@ import { useNavigation } from '@react-navigation/native';
 import { TextInput } from '../ui/TextInput';
 import { RadioButton } from '../ui/RadioButton';
 import { Button } from '../ui/Button';
+import Alert from '../ui/Alert';
 import { SignUpUserRegisterWithEmailMutation } from './SignUpUserRegisterWithEmailMutation';
 
 import { SignUpUserRegisterWithEmailMutation as SignUpUserRegisterWithEmailMutationType } from './__generated__/SignUpUserRegisterWithEmailMutation.graphql';

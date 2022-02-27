@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { ActivityIndicator, Alert, StyleSheet, View } from 'react-native';
+import { ActivityIndicator, StyleSheet, View } from 'react-native';
 
 import { BarCodeScanner } from 'expo-barcode-scanner';
 import { useLazyLoadQuery, useMutation } from 'react-relay';
 
 import { Button } from '../ui/Button';
+import Alert from '../ui/Alert';
 
 import { ScanQrCodeUserPointsCreateOrUpdateMutation } from './ScanQrCodeUserPointsCreateOrUpdateMutation';
 import type { ScanQrCodeUserPointsCreateOrUpdateMutation as ScanQrCodeUserPointsCreateOrUpdateMutationType } from './__generated__/ScanQrCodeUserPointsCreateOrUpdateMutation.graphql';

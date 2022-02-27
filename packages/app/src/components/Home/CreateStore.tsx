@@ -1,11 +1,12 @@
 import React, { useCallback, useState } from 'react';
-import { ActivityIndicator, Alert, ScrollView, View } from 'react-native';
+import { ActivityIndicator, ScrollView, View } from 'react-native';
 import { useMutation, useQueryLoader } from 'react-relay';
 
 import { useNavigation } from '@react-navigation/native';
 
 import { TextInput } from '../ui/TextInput';
 import { Button } from '../ui/Button';
+import Alert from '../ui/Alert';
 import { CreateStoreMutation } from './CreateStoreMutation';
 import { HomeStoreListQuery } from './HomeStoreListQuery';
 
@@ -78,7 +79,7 @@ export function CreateStore() {
       />
       <Button
         onPress={handleSubmit}
-        title="Criar uma conta"
+        title="Criar um estabelecimento"
         style={{ margin: 16, padding: 8 }}
         isLoading={isLoading}
       />

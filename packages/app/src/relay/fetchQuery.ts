@@ -20,7 +20,8 @@ export async function fetchQuery(
     authorization,
   };
 
-  const uri = manifest?.debuggerHost ? `http://${manifest.debuggerHost.split(':').shift().concat(':9001')}` : API_URL;
+  // const uri = manifest?.debuggerHost ? `http://${manifest.debuggerHost.split(':').shift().concat(':9001')}` : API_URL;
+  const uri = API_URL;
 
   const response = await fetch(`${uri}/graphql`, {
     method: 'POST',
