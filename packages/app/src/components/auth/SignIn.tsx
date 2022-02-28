@@ -18,8 +18,8 @@ export function SignIn() {
   const { navigate } = useNavigation();
   const { signIn } = useAuth();
 
-  const [email, setEmail] = useState('akinn@provider.com');
-  const [password, setPassword] = useState('123');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   const [, loadQueryHome] = useQueryLoader(HomeStoreListQuery);
   const [, loadQuerySettings] = useQueryLoader(SettingsMeQuery);

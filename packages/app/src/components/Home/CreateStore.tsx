@@ -15,8 +15,8 @@ export function CreateStore() {
 
   const [createStore, isLoading] = useMutation(CreateStoreMutation);
 
-  const [name, setName] = useState('Dobom Lanches');
-  const [description, setDescription] = useState('Um lanche muito gostoso!');
+  const [name, setName] = useState('');
+  const [description, setDescription] = useState('');
   const [pictureUrl] = useState(
     'https://looklanches.com.br/wp-content/uploads/2020/09/salada-1.jpg'
   );

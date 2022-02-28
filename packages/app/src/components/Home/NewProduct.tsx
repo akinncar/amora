@@ -13,9 +13,9 @@ export function NewProduct({ storeId }) {
   console.log({ storeId });
   const [createProduct, isLoading] = useMutation(NewProductMutation);
 
-  const [name, setName] = useState('X Tudo');
-  const [description, setDescription] = useState('Vem com tudo');
-  const [points, setPoints] = useState('8');
+  const [name, setName] = useState('');
+  const [description, setDescription] = useState('');
+  const [points, setPoints] = useState('');
   const [pictureUrl] = useState(
     'https://looklanches.com.br/wp-content/uploads/2020/09/salada-1.jpg'
   );

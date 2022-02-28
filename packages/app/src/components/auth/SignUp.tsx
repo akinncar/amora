@@ -21,10 +21,10 @@ export function SignUp() {
     );
 
   const [type, setType] = useState('customer'); // customer or provider
-  const [name, setName] = useState('Akinn Teste');
-  const [email, setEmail] = useState('akinn@teste.com');
-  const [password, setPassword] = useState('123');
-  const [confirmPassword, setConfirmPassword] = useState('123');
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
 
   function onCompleted(data) {
     if (data.UserRegisterWithEmail.error)
