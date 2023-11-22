@@ -17,6 +17,7 @@
     "start": "node ./dist/index.js",
     "build": "rimraf ./dist && tsc",
     "tsc": "tsc",
+    "env:example": "cp .env.example .env",
     "update-schema": "yarn es ./scripts/updateSchema.ts --extensions \".es6,.js,.es,.jsx,.mjs,.ts\""
   },
   "dependencies": {

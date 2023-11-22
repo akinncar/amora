@@ -9,6 +9,7 @@
     "web": "expo start --web",
     "eject": "expo eject",
     "relay": "relay-compiler",
+    "env:example": "cp .env.example .env",
     "postinstall": "expo-yarn-workspaces postinstall"
   },
   "dependencies": {

@@ -8,9 +8,11 @@
   },
   "scripts": {
     "server": "yarn workspace @amora/server start",
+    "build:server": "yarn workspace @amora/server build",
     "app:ios": "yarn workspace @amora/app ios",
     "app:android": "yarn workspace @amora/app android",
     "app:web": "yarn workspace @amora/app web",
+    "env:example": "yarn workspace @amora/app env:example && yarn workspace @amora/server env:example",
     "lint": "yarn eslint --fix"
   },
   "version": "1.0.0",
